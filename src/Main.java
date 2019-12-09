@@ -1,5 +1,5 @@
 public class Main {
-
+//amirhosein asabani mishe
     public static void main(String[] args) {
 //		Card card = new Plant();
 //		card.name = "pea";
@@ -13,5 +13,6 @@ public class Main {
 //		collection.showHand();
 //		collection.remove("pea");
 //		collection.showHand();
+
 	}
 }
