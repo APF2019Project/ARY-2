@@ -53,15 +53,15 @@ public abstract class Card {
         this.location = location;
     }
 
-//    public static int findCard(String name, ArrayList<Card> allCards){
-//        int index = -1;
-//        for (int i=0 ; i<allCards.size() ; i++){
-//            if(allCards.get(i).getName().equals(name)){
-//                index = i;
-//            }
-//        }
-//        return index;
-//    }
+    public static int findCard(String name, ArrayList<Card> allCards){
+        int index = -1;
+        for (int i=0 ; i<allCards.size() ; i++){
+            if(allCards.get(i).getName().equals(name)){
+                index = i;
+            }
+        }
+        return index;
+    }
 
 
 }

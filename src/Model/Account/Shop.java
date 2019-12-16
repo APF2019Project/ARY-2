@@ -1,12 +1,25 @@
 package Model.Account;
 
 import Model.Card.Card;
+import Model.Card.Plant;
+import Model.Card.Zombie;
 import Model.Collection;
 import Exeption.invalidCardExeption;
 import java.util.ArrayList;
 
 public class Shop {
     static ArrayList<Card> cardsNotBuy = new ArrayList();
+    private Player player;
+
+    public static int findCard(String name) {
+        int index = -1;
+        for (int i=0 ; i<cardsNotBuy.size() ; i++){
+            if(cardsNotBuy.get(i).getName().equals(name)){
+                index = i;
+            }
+        }
+        return index;
+    }
 
     public void showShop(){
         for (Card card : cardsNotBuy){
@@ -19,10 +32,23 @@ public class Shop {
         }
     }
     public void buy(String name) throws invalidCardExeption{
-        int index = Card.findCard(name, cardsNotBuy);
-        Collection.allCards.add(cardsNotBuy.get(index));
-        cardsNotBuy.remove(index);
-        // pool bayad kam shavad
+        int index = findCard(name);
+        int price = 0;
+
+        if(cardsNotBuy.get(index) instanceof Plant){
+            Plant plant = (Plant)cardsNotBuy.get(index);
+            price = plant.getSun() * plant.getCoolDown() * plant.getHealth() + 1;
+        }
+        else if(cardsNotBuy.get(index) instanceof Zombie){
+            Zombie zombie = (Zombie) cardsNotBuy.get(index);
+            price = zombie.getHealth() * (1 + zombie.getSpeed()) * 10;
+        }
+
+        if(player.getCoinForShop() >= price) {
+            Collection.allCards.add(cardsNotBuy.get(index));
+            cardsNotBuy.remove(index);
+            player.setCoinForShop(player.getCoinForShop() - price);
+        }
     }
 
 }
