@@ -21,6 +21,7 @@ public class Plant extends Card{
         return index;
     }
 
+
     public int getSun() {
         return sun;
     }
