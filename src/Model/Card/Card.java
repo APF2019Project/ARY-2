@@ -4,12 +4,14 @@ import Model.Map.Square;
 
 import java.util.ArrayList;
 
-public class Card {
+public abstract class Card {
     private String name;
     private int health;
     private int coolDown;
+    private int currentCoolDown;
     private int damage;
     private Square location;
+
 
     public String getName() {
         return name;
@@ -51,15 +53,15 @@ public class Card {
         this.location = location;
     }
 
-    public static int findCard(String name, ArrayList<Card> allCards){
-        int index = -1;
-        for (int i=0 ; i<allCards.size() ; i++){
-            if(allCards.get(i).getName().equals(name)){
-                index = i;
-            }
-        }
-        return index;
-    }
+//    public static int findCard(String name, ArrayList<Card> allCards){
+//        int index = -1;
+//        for (int i=0 ; i<allCards.size() ; i++){
+//            if(allCards.get(i).getName().equals(name)){
+//                index = i;
+//            }
+//        }
+//        return index;
+//    }
 
 
 }

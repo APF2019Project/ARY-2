@@ -4,9 +4,9 @@ import Exeption.invalidCardExeption;
 import java.util.ArrayList;
 
 public class Collection {
-    public static ArrayList<Card> allCards = new ArrayList<>();
-    public ArrayList<Card> unSelectedCards = new ArrayList<>();
-    public ArrayList<Card> selectedCards = new ArrayList<>();
+    public static ArrayList<Plant> allCards = new ArrayList<>();
+    public ArrayList<Plant> unSelectedCards = new ArrayList<>();
+    public ArrayList<Plant> selectedCards = new ArrayList<>();
     private int maxCard;
 
 
@@ -16,7 +16,7 @@ public class Collection {
         }
     }
     public void select(String name) throws invalidCardExeption{
-        int index = Card.findCard(name, allCards);
+        int index = Plant.findCard(name, allCards);
         selectedCards.add(allCards.get(index));
     }
     public void showCollection(){
@@ -25,7 +25,16 @@ public class Collection {
         }
     }
     public void remove(String name) throws invalidCardExeption {
-        int index = Card.findCard(name, selectedCards);
+        int index = Plant.findCard(name, selectedCards);
         selectedCards.remove(index);
+    }
+    public static int findCard(String name, ArrayList<Plant> allCards){
+        int index = -1;
+        for (int i=0 ; i<allCards.size() ; i++){
+            if(allCards.get(i).getName().equals(name)){
+                index = i;
+            }
+        }
+        return index;
     }
 }
