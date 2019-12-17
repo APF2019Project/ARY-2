@@ -25,7 +25,7 @@ public class Day implements GameMode{
             selected = plant;
     }
     public void plant(int row, int column){
-
+//        int i=0;
     }
 
     @Override
