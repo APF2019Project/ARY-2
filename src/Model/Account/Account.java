@@ -89,5 +89,13 @@ public class Account {
             return false;
         }
     }
+    public static boolean hasAccount(Account account) {
+        try {
+            Account.getAccount(account.getUsername());
+            return true;
+        } catch (InvalidAccountException e) {
+            return false;
+        }
+    }
 
 }
