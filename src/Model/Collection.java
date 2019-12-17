@@ -28,7 +28,7 @@ public class Collection {
         int index = Plant.findCard(name, selectedCards);
         selectedCards.remove(index);
     }
-    public static int findCard(String name, ArrayList<Plant> allCards) {
+    public static int findCard(String name, ArrayList<Card> allCards) {
         int index = -1;
         for (int i=0 ; i<allCards.size() ; i++){
             if(allCards.get(i).getName().equals(name)){

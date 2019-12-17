@@ -4,7 +4,7 @@ import Model.Card.Card;
 import Model.Card.Plant;
 import Model.Card.Zombie;
 import Model.Collection;
-import Exeption.invalidCardExeption;
+import Exception.invalidCardExeption;
 import java.util.ArrayList;
 
 public class Shop {
