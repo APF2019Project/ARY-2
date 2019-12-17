@@ -15,4 +15,7 @@ public class Main {
 //		collection.showHand();
 
 	}
+    public void showMenu() {
+
+    }
 }
