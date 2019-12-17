@@ -1,7 +1,7 @@
 package Controller.Menu;
 
 import Model.Account.Account;
-
+import Exception.AccountAlreadyExistsException;
 public class LoginMenu extends Menu{
 
     private static LoginMenu loginMenu;
@@ -11,7 +11,7 @@ public class LoginMenu extends Menu{
         super(name);
     }
 
-    public LoginMenu getLoginMenu(){
+    public static LoginMenu getLoginMenu(){
         if(loginMenu == null){
             loginMenu = new LoginMenu("LoginMenu");
         }

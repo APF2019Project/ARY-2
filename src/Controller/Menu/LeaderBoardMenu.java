@@ -6,7 +6,7 @@ public class LeaderBoardMenu extends Menu{
     public LeaderBoardMenu(String name) {
         super(name);
     }
-    public LeaderBoardMenu getLeaderBoardMenu(){
+    public static LeaderBoardMenu getLeaderBoardMenu(){
         if(leaderBoardMenu == null){
             leaderBoardMenu = new LeaderBoardMenu("LeaderBoardMenu");
         }

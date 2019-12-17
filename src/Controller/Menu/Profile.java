@@ -8,7 +8,7 @@ public class Profile extends Menu {
         super(name);
     }
 
-    public Profile getProfile(){
+    public static Profile getProfile(){
         if(Profile.profile == null){
             Profile.profile = new Profile("Profile");
         }
