@@ -11,15 +11,15 @@ public class Plant extends Card{
     private boolean isWater;
     public ArrayList<Weapon> weapons = new ArrayList<>();
 
-    public static int findCard(String name, ArrayList<Plant> allCards){
-        int index = -1;
-        for (int i=0 ; i<allCards.size() ; i++){
-            if(allCards.get(i).getName().equals(name)){
-                index = i;
-            }
-        }
-        return index;
-    }
+//    public static int findCard(String name, ArrayList<Plant> allCards){
+//        int index = -1;
+//        for (int i=0 ; i<allCards.size() ; i++){
+//            if(allCards.get(i).getName().equals(name)){
+//                index = i;
+//            }
+//        }
+//        return index;
+//    }
 
 
     public int getSun() {

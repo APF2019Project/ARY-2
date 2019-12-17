@@ -67,7 +67,7 @@ public class Account {
         this.money = (int) Account.INITIAL_MONEY;
         this.wins = 0;
     }
-    public static Account getAccount(int ID) throws InvalidAccountException {
+    public static Account getAccount(String ID) throws InvalidAccountException, InvalidAccountException {
         for (Account account : Account.getAccounts()) {
             if (account.getID() == ID) return account;
         }
