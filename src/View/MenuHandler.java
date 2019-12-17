@@ -19,6 +19,6 @@ public class MenuHandler {
     }
 
     public static void showMenu(){
-        MenuHandler.currentMenu.
+//        MenuHandler.currentMenu
     }
 }
