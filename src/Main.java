@@ -16,6 +16,6 @@ public class Main {
 
 	}
     public void showMenu() {
-
+        int i=1;
     }
 }
