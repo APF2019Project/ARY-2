@@ -1,9 +1,7 @@
 package Model.Account;
 
-import Controller.Exception.InvalidAccountException;
-import Controller.Exception.InvalidAccoutException;
 import Exception.InvalidAccountException;
-import Exception.InvalidAccoutException;
+import Exception.InvalidAccountException;
 
 public class Account {
     private static final Object INITIAL_MONEY =0 ;
@@ -69,11 +67,11 @@ public class Account {
         this.money = (int) Account.INITIAL_MONEY;
         this.wins = 0;
     }
-    public static Account getAccount(String ID) throws InvalidAccountException, InvalidAccoutException {
+    public static Account getAccount(String ID) throws InvalidAccountException, InvalidAccountException {
         for (Account account : Account.getAccounts()) {
             if (account.getID() == ID) return account;
         }
-        throw new InvalidAccoutException();
+        throw new InvalidAccountException();
     }
 
 
@@ -81,7 +79,7 @@ public class Account {
         try {
             Account.getAccount(username);
             return true;
-        } catch (InvalidAccountException | InvalidAccoutException e) {
+        } catch (InvalidAccountException e) {
             return false;
         }
     }

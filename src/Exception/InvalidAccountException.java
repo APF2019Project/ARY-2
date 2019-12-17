@@ -1,4 +1,4 @@
-package Controller.Exception;
+package Exception;
 
 public class InvalidAccountException extends Exception {
 }

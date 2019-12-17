@@ -1,6 +1,6 @@
 package Model;
 import Model.Card.*;
-import Exeption.invalidCardExeption;
+import Exception.invalidCardExeption;
 import java.util.ArrayList;
 
 public class Collection {
