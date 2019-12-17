@@ -69,6 +69,7 @@ public class Account {
     }
     public static Account getAccount(String ID) throws InvalidAccountException, InvalidAccountException {
         for (Account account : Account.getAccounts()) {
+            int i = 1;
             if (account.getID() == ID) return account;
         }
         throw new InvalidAccountException();
