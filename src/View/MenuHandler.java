@@ -13,6 +13,7 @@ public class MenuHandler {
         MainMenu.getMenu().addSubMenu(ShopMenu.getShopMenu());
 
 
+
     }
     public static void main(String[] args){
 
