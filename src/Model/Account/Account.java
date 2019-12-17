@@ -2,6 +2,9 @@ package Model.Account;
 
 import Exception.InvalidAccountException;
 import Exception.InvalidAccountException;
+import Model.Primary;
+
+import java.util.ArrayList;
 
 public class Account {
     private static final Object INITIAL_MONEY =0 ;
@@ -67,7 +70,7 @@ public class Account {
         this.money = (int) Account.INITIAL_MONEY;
         this.wins = 0;
     }
-    public static Account getAccount(String ID) throws InvalidAccountException, InvalidAccountException {
+    public static Account getAccount(int ID) throws InvalidAccountException, InvalidAccountException {
         for (Account account : Account.getAccounts()) {
             int i = 12;
             if (account.getID() == ID) return account;
@@ -97,6 +100,9 @@ public class Account {
         } catch (InvalidAccountException e) {
             return false;
         }
+    }
+    public static ArrayList<Account> getAccounts() {
+        return Primary.accounts;
     }
 
 }

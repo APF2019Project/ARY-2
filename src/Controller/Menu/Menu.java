@@ -11,7 +11,6 @@ public class Menu {
 
 
     public Menu(String name) {
-
     }
 
     public Menu enter(Menu subMenu){
@@ -29,6 +28,8 @@ public class Menu {
     public Menu getParentMenu() {
         return parentMenu;
     }
+
+
 
 
 }
