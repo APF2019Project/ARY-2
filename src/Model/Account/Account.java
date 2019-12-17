@@ -14,6 +14,8 @@ public class Account {
     protected int ID;
     protected int money;
     protected int wins;
+    private static Account defaultAccount = new Account("name","user","pass"); // badan bayad sakhte shavad
+    protected Player player;
 
     public String getName() {
         return name;
@@ -61,6 +63,21 @@ public class Account {
 
     public void setWins(int wins) {
         this.wins = wins;
+    }
+
+    public Player getPlayer() {
+//        if(this.player == null){
+//            //player bayad new shavad
+//        }
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public static Account getDefaultAccount() {
+        return defaultAccount;
     }
 
     public Account(String name, String username, String password) {

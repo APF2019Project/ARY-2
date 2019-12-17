@@ -1,5 +1,9 @@
 package View;
+import Controller.Game;
 import Controller.Menu.*;
+
+import java.util.Scanner;
+
 public class MenuHandler {
     public static Menu currentMenu;
 
@@ -16,10 +20,17 @@ public class MenuHandler {
 
     }
     public static void main(String[] args){
-
+        try {
+            initMenus();
+        }catch (Exception e){}
+        ConsoleInput consoleInput = new ConsoleInput();
+        consoleInput.play();
     }
 
     public static void showMenu(){
 //        MenuHandler.currentMenu
+    }
+    public static Scanner getGameScanner(){
+        return Game.accounts[BattleMenu.getBattleMenu().getTurn()].getPlayer().getOutputStream();
     }
 }
