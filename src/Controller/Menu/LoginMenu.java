@@ -1,7 +1,10 @@
 package Controller.Menu;
 
+import Controller.Game;
 import Model.Account.Account;
 import Exception.AccountAlreadyExistsException;
+import Exception.InvalidAccountException;
+import Exception.WrongPasswordException;
 
 public class LoginMenu extends Menu{
 
@@ -19,6 +22,7 @@ public class LoginMenu extends Menu{
         return loginMenu;
     }
 
+    @Override
     public Menu enter(Menu subMenu) {
         if(this.account==null){
             System.out.println("no account has been signed in yet");
@@ -31,6 +35,18 @@ public class LoginMenu extends Menu{
         if (Account.hasAccount(username))
             throw new AccountAlreadyExistsException();
         temporaryAccount = new Account(username, password);
+        Account.addNewAccount(temporaryAccount);
+    }
+
+    public void login(String username, String password) throws InvalidAccountException, WrongPasswordException {
+        Account account = Account.getAccount(username);
+        if(account.getPassword().equals(password)){
+            Game.accounts[0] = account;
+            Game.hasLoggedIn = true;
+            this.account = account;
+        }else {
+            throw new WrongPasswordException();
+        }
     }
 
 }
