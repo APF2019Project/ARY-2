@@ -2,28 +2,22 @@ package Model.Account;
 
 import Exception.InvalidAccountException;
 import Exception.InvalidAccountException;
+import Model.Collection;
 import Model.Primary;
 
 import java.util.ArrayList;
 
 public class Account {
     private static final Object INITIAL_MONEY =0 ;
-    protected String name;
     protected String username;
     protected String password;
     protected int ID;
     protected int money;
     protected int wins;
-    private static Account defaultAccount = new Account("name","user","pass"); // badan bayad sakhte shavad
+    protected Collection collection;
+    private static Account defaultAccount = new Account("user","pass"); // badan bayad sakhte shavad
     protected Player player;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getUsername() {
         return username;
@@ -66,9 +60,9 @@ public class Account {
     }
 
     public Player getPlayer() {
-//        if(this.player == null){
-//            //player bayad new shavad
-//        }
+        if(this.player == null){
+            player = new Player();
+        }
         return player;
     }
 
@@ -80,12 +74,12 @@ public class Account {
         return defaultAccount;
     }
 
-    public Account(String name, String username, String password) {
-        this.name = name;
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
         this.money = (int) Account.INITIAL_MONEY;
         this.wins = 0;
+        this.collection = new Collection();
     }
     public static Account getAccount(int ID) throws InvalidAccountException, InvalidAccountException {
         for (Account account : Account.getAccounts()) {

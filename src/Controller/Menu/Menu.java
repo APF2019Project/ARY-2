@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Menu {
     protected Account account;
     Menu parentMenu;
-    ArrayList<Menu> subMenus;
+    ArrayList<Menu> subMenus = new ArrayList<>();
 
 
     public Menu(String name) {

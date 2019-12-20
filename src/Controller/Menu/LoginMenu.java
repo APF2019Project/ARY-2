@@ -2,6 +2,7 @@ package Controller.Menu;
 
 import Model.Account.Account;
 import Exception.AccountAlreadyExistsException;
+
 public class LoginMenu extends Menu{
 
     private static LoginMenu loginMenu;
@@ -26,10 +27,10 @@ public class LoginMenu extends Menu{
         return super.enter(subMenu);
     }
 
-    public void creatAccount(String name, String username, String password) throws AccountAlreadyExistsException {
+    public void creatAccount(String username, String password) throws AccountAlreadyExistsException {
         if (Account.hasAccount(username))
             throw new AccountAlreadyExistsException();
-        temporaryAccount = new Account(name, username, password);
+        temporaryAccount = new Account(username, password);
     }
 
 }

@@ -16,7 +16,7 @@ public class MenuHandler {
         MainMenu.getMenu().addSubMenu(Profile.getProfile());
         MainMenu.getMenu().addSubMenu(ShopMenu.getShopMenu());
 
-
+        currentMenu = LoginMenu.getLoginMenu();
 
     }
     public static void main(String[] args){

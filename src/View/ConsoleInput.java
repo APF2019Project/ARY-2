@@ -13,7 +13,8 @@ public class ConsoleInput {
         String input;
         // yekseri chize digar
         while (scan.hasNext()){
-            input = scan.nextLine();
+            input = scan.nextLine().trim();
+            ConsoleOutput.commandHandlerBegin(input.split(" "));
         // paas bede be consoleOut
         }
     }
