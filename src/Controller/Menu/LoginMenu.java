@@ -49,4 +49,14 @@ public class LoginMenu extends Menu{
         }
     }
 
+//    public void logIn(String username, String password) throws InvalidAccountException, WrongPassException {
+//        Account account = Account.getAccount(username);
+//        if (account.getPassword().equals(password)) {
+//            Game.accounts[0] = account;
+//            Game.hasLoggedIn = true;
+//            this.account=account;
+//        } else {
+//            throw new WrongPassException();
+//        }
+//    }
 }

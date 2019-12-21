@@ -11,7 +11,7 @@ public abstract class Card {
     private int currentCoolDown;
     private int damage;
     private Square location;
-
+    private int price;
 
     public String getName() {
         return name;

@@ -9,7 +9,18 @@ public class Plant extends Card{
     private int activateDelay;
     private int timeToReset;
     private boolean isWater;
+    private boolean isSunFlower;
+    private boolean isCatTail;
+    private boolean isLilyPad;
+    private boolean hasMagnet;
+    private boolean isSnowPea;
+    private boolean isScaredMushroom;
+    private boolean isTangleKelp;
+    private boolean isNut;
+    private boolean isFreezing;
+    private boolean isCactus;
     public ArrayList<Weapon> weapons = new ArrayList<>();
+
 
 //    public static int findCard(String name, ArrayList<Plant> allCards){
 //        int index = -1;
@@ -45,5 +56,65 @@ public class Plant extends Card{
     }
     public void setTimeToReset(int timeToReset) {
         this.timeToReset = timeToReset;
+    }
+    public boolean isSunFlower() {
+        return isSunFlower;
+    }
+    public void setSunFlower(boolean sunFlower) {
+        isSunFlower = sunFlower;
+    }
+    public boolean isCatTail() {
+        return isCatTail;
+    }
+    public void setCatTail(boolean catTail) {
+        isCatTail = catTail;
+    }
+    public boolean isLilyPad() {
+        return isLilyPad;
+    }
+    public void setLilyPad(boolean lilyPad) {
+        isLilyPad = lilyPad;
+    }
+    public boolean isHasMagnet() {
+        return hasMagnet;
+    }
+    public void setHasMagnet(boolean hasMagnet) {
+        this.hasMagnet = hasMagnet;
+    }
+    public boolean isSnowPea() {
+        return isSnowPea;
+    }
+    public void setSnowPea(boolean snowPea) {
+        isSnowPea = snowPea;
+    }
+    public boolean isScaredMushroom() {
+        return isScaredMushroom;
+    }
+    public void setScaredMushroom(boolean scaredMushroom) {
+        isScaredMushroom = scaredMushroom;
+    }
+    public boolean isTangleKelp() {
+        return isTangleKelp;
+    }
+    public void setTangleKelp(boolean tangleKelp) {
+        isTangleKelp = tangleKelp;
+    }
+    public boolean isNut() {
+        return isNut;
+    }
+    public void setNut(boolean nut) {
+        isNut = nut;
+    }
+    public boolean isFreezing() {
+        return isFreezing;
+    }
+    public void setFreezing(boolean freezing) {
+        isFreezing = freezing;
+    }
+    public boolean isCactus() {
+        return isCactus;
+    }
+    public void setCactus(boolean cactus) {
+        isCactus = cactus;
     }
 }
