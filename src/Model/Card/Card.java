@@ -13,6 +13,14 @@ public abstract class Card {
     private Square location;
     private int price;
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }

@@ -21,6 +21,26 @@ public class Plant extends Card{
     private boolean isCactus;
     public ArrayList<Weapon> weapons = new ArrayList<>();
 
+    public Plant(String name,int health,int cooldown,int sun,int timeToReset,int activateDelay,boolean isWater,int price,boolean isSunFlower,boolean isCatTail, boolean isLilyPad,boolean hasMagnet,boolean isSnowPea,boolean isScaredMushroom,boolean isTangleKelp, boolean isNut,boolean isFreezing,boolean isCactus){
+        super.setName(name);
+        super.setHealth(health);
+        super.setCoolDown(cooldown);
+        setSun(sun);
+        setTimeToReset(timeToReset);
+        setActivateDelay(activateDelay);
+        setWater(isWater);
+        super.setPrice(price);
+        setSunFlower(isSunFlower);
+        setCatTail(isCatTail);
+        setLilyPad(isLilyPad);
+        setHasMagnet(hasMagnet);
+        setSnowPea(isSnowPea);
+        setScaredMushroom(isScaredMushroom);
+        setTangleKelp(isTangleKelp);
+        setNut(isNut);
+        setFreezing(isFreezing);
+        setCactus(isCactus);
+    }
 
 //    public static int findCard(String name, ArrayList<Plant> allCards){
 //        int index = -1;
