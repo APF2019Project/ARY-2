@@ -24,16 +24,19 @@ public class LoginMenu extends Menu{
 
     @Override
     public Menu enter(Menu subMenu) {
-        if(this.account==null){
+        if(this.account==null && subMenu instanceof MainMenu){
             System.out.println("no account has been signed in yet");
             return this;
         }
         return super.enter(subMenu);
     }
 
+
     public void creatAccount(String username, String password) throws AccountAlreadyExistsException {
-        if (Account.hasAccount(username))
+        if (Account.hasAccount(username)) {
+            System.out.println("account already exist");
             throw new AccountAlreadyExistsException();
+        }
         temporaryAccount = new Account(username, password);
         Account.addNewAccount(temporaryAccount);
     }
@@ -48,15 +51,4 @@ public class LoginMenu extends Menu{
             throw new WrongPasswordException();
         }
     }
-
-//    public void logIn(String username, String password) throws InvalidAccountException, WrongPassException {
-//        Account account = Account.getAccount(username);
-//        if (account.getPassword().equals(password)) {
-//            Game.accounts[0] = account;
-//            Game.hasLoggedIn = true;
-//            this.account=account;
-//        } else {
-//            throw new WrongPassException();
-//        }
-//    }
 }

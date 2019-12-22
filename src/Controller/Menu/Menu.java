@@ -1,6 +1,7 @@
 package Controller.Menu;
 
 import Model.Account.Account;
+import View.MenuHandler;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,8 @@ public class Menu {
     }
 
     public Menu enter(Menu subMenu){
+        if(subMenus.contains(subMenu))
+            MenuHandler.currentMenu = subMenu;
         return subMenu;
     }
 
@@ -22,6 +25,7 @@ public class Menu {
     }
 
     public void addSubMenu(Menu subMenu) {
+        subMenu.parentMenu = this;
         this.subMenus.add(subMenu);
     }
 
@@ -29,7 +33,8 @@ public class Menu {
         return parentMenu;
     }
 
-
-
+    public void exit(){
+        MenuHandler.currentMenu = parentMenu;
+    }
 
 }

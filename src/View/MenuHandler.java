@@ -12,7 +12,6 @@ public class MenuHandler {
         LoginMenu.getLoginMenu().addSubMenu(CollectionMenu.getCollectionMenu());
         LoginMenu.getLoginMenu().addSubMenu(MainMenu.getMenu());
 
-//        MainMenu.getMenu().addSubMenu();
         MainMenu.getMenu().addSubMenu(Profile.getProfile());
         MainMenu.getMenu().addSubMenu(ShopMenu.getShopMenu());
 

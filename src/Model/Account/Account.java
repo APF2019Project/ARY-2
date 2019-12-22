@@ -1,7 +1,6 @@
 package Model.Account;
 
 import Exception.InvalidAccountException;
-import Exception.InvalidAccountException;
 import Model.Collection;
 import Model.Primary;
 import com.gilecode.yagson.YaGson;
