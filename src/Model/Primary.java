@@ -36,8 +36,7 @@ public class Primary {
         plants.add(new Plant("Twin Sunflower",2,5,3,2,0,false,0,true,false ,false,false, false, false, false, false, false,false));
         plants.add(new Plant("Jalapeno",0,5,4,0,0,false,0,false,false ,false,false, false, false, false, false, false,false));
 
-    }
-    private static void zombiesJson(){
+
 
     }
 }
