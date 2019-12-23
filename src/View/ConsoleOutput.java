@@ -82,6 +82,7 @@ public class ConsoleOutput {
                 MainMenu.getMenu().enter(Play.getMenu());
                 //initial sazi collection
                 Game.accounts[0].setCollection(new Collection());
+                //in tike bayad dar bakhsh entekhabe mode bazi etefagh bioftad
                 Game.accounts[0].getCollection().init(true);
             }
         }
@@ -140,13 +141,3 @@ public class ConsoleOutput {
         }
     }
 }
-/*
-create account
-ali
-123
-login
-ali
-123
-play
-show collection
- */

@@ -25,7 +25,6 @@ public class MenuHandler {
             initMenus();
             Primary.preprocess();
         }catch (Exception e){}
-        Primary.json();
         ConsoleInput consoleInput = new ConsoleInput();
         consoleInput.play();
     }
