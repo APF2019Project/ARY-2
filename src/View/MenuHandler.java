@@ -1,6 +1,7 @@
 package View;
 import Controller.Game;
 import Controller.Menu.*;
+import Model.Primary;
 
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class MenuHandler {
     public static void main(String[] args){
         try {
             initMenus();
+            Primary.preprocess();
         }catch (Exception e){}
         ConsoleInput consoleInput = new ConsoleInput();
         consoleInput.play();

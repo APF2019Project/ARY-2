@@ -5,6 +5,9 @@ import Controller.Menu.LoginMenu;
 import Controller.Menu.*;
 import Exception.*;
 import Model.Account.Account;
+import Model.Card.Plant;
+import Model.Collection;
+import Model.Primary;
 
 public class ConsoleOutput {
     public static String[] scanUserPass(){
@@ -75,6 +78,12 @@ public class ConsoleOutput {
             if(input[0].equals("profile")){
                 MainMenu.getMenu().enter(Profile.getProfile());
             }
+            if(input[0].equals("play")){
+                MainMenu.getMenu().enter(Play.getMenu());
+                //initial sazi collection
+                Game.accounts[0].setCollection(new Collection());
+                Game.accounts[0].getCollection().init(true);
+            }
         }
 
         if(MenuHandler.currentMenu instanceof Profile){
@@ -84,7 +93,7 @@ public class ConsoleOutput {
                 password = userAndPas[1];
             }
             if(input[0].equals("create")){
-                //porside beshe
+                //kheili chert bod nazadim
             }
             if(input[0].equals("change")){
                 Profile.getProfile().change(username, password);
@@ -103,6 +112,25 @@ public class ConsoleOutput {
             }
         }
 
+        if(MenuHandler.currentMenu instanceof CollectionMenu){
+            if(input[0].equals("show") && input[1].equals("hand")){
+                Game.accounts[0].getCollection().showHand();
+            }
+            if(input[0].equals("show") && input[1].equals("collection")){
+                Game.accounts[0].getCollection().showCollection();
+            }
+            if(input[0].length() >= 6 && input[0].substring(0, 6).equals("select")){
+                try {
+                    Game.accounts[0].getCollection().select(input[0].substring(7, input[0].length() - 1));
+                }catch (invalidCardExeption e){}
+            }
+            if(input[0].length() >= 6 && input[0].substring(0, 6).equals("remove")){
+                try {
+                    Game.accounts[0].getCollection().remove(input[0].substring(7, input[0].length() - 1));
+                }catch (invalidCardExeption e){}
+            }
+        }
+
         if(input[0].equals("exit")){
             if(MenuHandler.currentMenu instanceof  LoginMenu)
                 System.exit(0);
@@ -112,3 +140,13 @@ public class ConsoleOutput {
         }
     }
 }
+/*
+create account
+ali
+123
+login
+ali
+123
+play
+show collection
+ */
