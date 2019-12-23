@@ -3,6 +3,7 @@ import Controller.Game;
 import Controller.Menu.*;
 import Model.Primary;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MenuHandler {
@@ -19,11 +20,12 @@ public class MenuHandler {
         currentMenu = LoginMenu.getLoginMenu();
 
     }
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException {
         try {
             initMenus();
             Primary.preprocess();
         }catch (Exception e){}
+        Primary.json();
         ConsoleInput consoleInput = new ConsoleInput();
         consoleInput.play();
     }
