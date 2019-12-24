@@ -60,13 +60,14 @@ public class Day implements GameMode{
             }
         }
     }
+
     public boolean shootConditioin(int column, int row){
-        for(int i=row ; i<Map.rowNumber ; i++){
-            if(map.board[column][i].zombies.size()>0){
+        for(int i=row ; i<Map.rowNumber ; i++) {
+            if (map.board[column][i].zombies.size() > 0) {
                 return true;
             }
-            return false;
         }
+        return false;
     }
 
     @Override
