@@ -3,10 +3,7 @@ package Model;
 import Model.Account.Account;
 import Model.Card.Plant;
 import Model.Card.Zombie;
-import com.gilecode.yagson.YaGson;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class Primary {
@@ -51,8 +48,7 @@ public class Primary {
         }
 
     }
-    private static void zombiesJson() throws IOException {
-        YaGson gson = new YaGson();
+    private static void zombiesJson(){
         zombies.add(new Zombie("Zombie",2,2,0,false));
         zombies.add(new Zombie("Football Zombie",4,3,0,false));
         zombies.add(new Zombie("Buckethead Zombie",3, 2,0,false));

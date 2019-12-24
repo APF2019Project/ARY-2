@@ -17,7 +17,7 @@ public class Account {
     protected int ID;
     protected int money;
     protected int wins;
-    protected Collection collection;
+    private Collection collection;
     private static Account defaultAccount = new Account("user","pass"); // badan bayad sakhte shavad
     protected Player player;
 
@@ -135,5 +135,11 @@ public class Account {
     }
     public void setPlayer(Player player) {
         this.player = player;
+    }
+    public Collection getCollection() {
+        return collection;
+    }
+    public void setCollection(Collection collection) {
+        this.collection = collection;
     }
 }
