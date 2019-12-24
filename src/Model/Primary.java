@@ -10,7 +10,10 @@ public class Primary {
     public static ArrayList<Account> accounts = new ArrayList<>();
     public static ArrayList<Zombie> zombies= new ArrayList<Zombie>();
     public static ArrayList<Plant> plants = new ArrayList<>();
-    private static void plantJson(){
+    public static void preprocess(){
+        plantJson();
+    }
+    public static void plantJson(){
         plants.add(new Plant("Peashooter",2,2,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
         plants.add(new Plant("Snow pea",3,3,3,3,0,false,0,false,false ,false,false, true, false, false, false, false,false));
         plants.add(new Plant("Cabbage-pult",2,3,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));

@@ -26,11 +26,11 @@ public class Shop {
             System.out.println(card.getName());
         }
     }
-    public void showCollection(){
-        for (Card card : Collection.allCards){
-            System.out.println(card.getName());
-        }
-    }
+//    public void showCollection(){
+//        for (Card card : Collection.allCards){
+//            System.out.println(card.getName());
+//        }
+//    }
     public void buy(String name) throws invalidCardExeption{
         int index = findCard(name);
         int price = 0;
