@@ -38,6 +38,21 @@ public class Primary {
 
     }
     private static void zombiesJson(){
+        zombies.add(new Zombie("Zombie",2,2,0,false));
+        zombies.add(new Zombie("Football Zombie",4,3,0,false));
+        zombies.add(new Zombie("Buckethead Zombie",3, 2,0,false));
+        zombies.add(new Zombie("Conehead Zombie",3,2,0,false));
+        zombies.add(new Zombie("Zomboni",3,2,0,false));
+        zombies.add(new Zombie("Catapult Zombie",3,2,0,false));
+        zombies.add(new Zombie("Bungee Zombie",3,0 ,0,false));
+        zombies.add(new Zombie("balloon Zombie",3,2,0,false));
+        zombies.add(new Zombie("Newspaper Zombie",2,2,2,false));
+        zombies.add(new Zombie("Target Zombie",3,2,3,false));
+        zombies.add(new Zombie("Screen door Zombie",2,2,4,false));
+        zombies.add(new Zombie("Giga-gargantuar",6,1,0,false));
+        zombies.add(new Zombie("Pogo Zombie",2,2,0,false));
+        zombies.add(new Zombie("Snorkel Zombie",2,2,0,true));
+        zombies.add(new Zombie("Dolphine Rider Zombie",2,2,2,true));
 
     }
 }
