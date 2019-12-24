@@ -44,7 +44,7 @@ public class Day implements GameMode{
     }
     public void healthDecrease(){
         //dar har turn check mikonad agar tir be zombie khord az janash gozashtan
-        //turn badan ok mishavad
+        //turn badan ok mishavaddd
     }
     public void shoot(){
         for(int i=0 ; i<Map.colNumber; i++){
