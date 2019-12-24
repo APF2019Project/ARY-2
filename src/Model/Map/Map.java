@@ -1,5 +1,8 @@
 package Model.Map;
 
+import Model.Card.Plant;
+import Model.Card.Zombie;
+
 import java.util.ArrayList;
 
 public class Map {

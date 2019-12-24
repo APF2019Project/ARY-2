@@ -3,13 +3,15 @@ package Model.Map;
 import Model.Card.Plant;
 import Model.Card.Zombie;
 
+import java.util.ArrayList;
+
 public class Square {
     private int rowNumber;
     private int columnNumber;
     private boolean isWater;
     private boolean isFull;
-    private Plant plantOnSquare;
-    private Zombie zombieOnSquare;
+    public ArrayList<Plant> plant = new ArrayList<>();
+    public ArrayList<Zombie> zombies = new ArrayList<>();
 
 
     public Square(int i, int j){

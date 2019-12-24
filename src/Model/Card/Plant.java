@@ -8,6 +8,7 @@ public class Plant extends Card{
     private int sun;
     private int activateDelay;
     private int timeToReset;
+    private int lastshoot;
     private boolean isWater;
     private boolean isSunFlower;
     private boolean isCatTail;
@@ -42,17 +43,13 @@ public class Plant extends Card{
         setCactus(isCactus);
     }
 
-//    public static int findCard(String name, ArrayList<Plant> allCards){
-//        int index = -1;
-//        for (int i=0 ; i<allCards.size() ; i++){
-//            if(allCards.get(i).getName().equals(name)){
-//                index = i;
-//            }
-//        }
-//        return index;
-//    }
 
-
+    public int getLastshoot() {
+        return lastshoot;
+    }
+    public void setLastshoot(int lastshoot) {
+        this.lastshoot = lastshoot;
+    }
     public int getSun() {
         return sun;
     }

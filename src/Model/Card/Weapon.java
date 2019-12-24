@@ -1,11 +1,19 @@
 package Model.Card;
 
 public class Weapon {
+    private int row;
+    private int column;
     private int turn;
     private int numOfBulletInEachTurn;
     private int cycle;
     private int power;
     private int speedReduce;
+    private Plant plant;
+
+    public Bullet bulletMaker(){
+        Bullet bullet = new Bullet(row, column, plant);
+        return bullet;
+    }
 
 
     public int getTurn() {
@@ -37,5 +45,11 @@ public class Weapon {
     }
     public void setSpeedReduce(int speedReduse) {
         this.speedReduce = speedReduce;
+    }
+    public Plant getPlant() {
+        return plant;
+    }
+    public void setPlant(Plant plant) {
+        this.plant = plant;
     }
 }
