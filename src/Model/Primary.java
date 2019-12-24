@@ -3,14 +3,22 @@ package Model;
 import Model.Account.Account;
 import Model.Card.Plant;
 import Model.Card.Zombie;
+import com.gilecode.yagson.YaGson;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Primary {
     public static ArrayList<Account> accounts = new ArrayList<>();
     public static ArrayList<Zombie> zombies= new ArrayList<Zombie>();
     public static ArrayList<Plant> plants = new ArrayList<>();
-    private static void plantJson(){
+    public static void preprocess() throws IOException {
+        plantJson();
+        zombiesJson();
+    }
+    public static void plantJson() throws IOException {
+        YaGson gson = new YaGson();
         plants.add(new Plant("Peashooter",2,2,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
         plants.add(new Plant("Snow pea",3,3,3,3,0,false,0,false,false ,false,false, true, false, false, false, false,false));
         plants.add(new Plant("Cabbage-pult",2,3,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
@@ -35,9 +43,16 @@ public class Primary {
         plants.add(new Plant("Sunflower",2,2,1,2,0,false,0,true,false ,false,false, false, false, false, false, false,false));
         plants.add(new Plant("Twin Sunflower",2,5,3,2,0,false,0,true,false ,false,false, false, false, false, false, false,false));
         plants.add(new Plant("Jalapeno",0,5,4,0,0,false,0,false,false ,false,false, false, false, false, false, false,false));
+        FileWriter fileWriter = new FileWriter("Plant.json", false);
+        for (Plant plant :
+                plants) {
+            gson.toJson(plant, fileWriter);
+            fileWriter.write("\n");
+        }
 
     }
-    private static void zombiesJson(){
+    private static void zombiesJson() throws IOException {
+        YaGson gson = new YaGson();
         zombies.add(new Zombie("Zombie",2,2,0,false));
         zombies.add(new Zombie("Football Zombie",4,3,0,false));
         zombies.add(new Zombie("Buckethead Zombie",3, 2,0,false));
@@ -53,6 +68,12 @@ public class Primary {
         zombies.add(new Zombie("Pogo Zombie",2,2,0,false));
         zombies.add(new Zombie("Snorkel Zombie",2,2,0,true));
         zombies.add(new Zombie("Dolphine Rider Zombie",2,2,2,true));
+        FileWriter fileWriter = new FileWriter("Zombie.json", false);
+        for (Zombie zombie :
+                zombies) {
+            gson.toJson(zombie, fileWriter);
+            fileWriter.write("\n");
+        }
 
     }
 }
