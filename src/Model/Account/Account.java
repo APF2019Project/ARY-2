@@ -18,6 +18,7 @@ public class Account {
     protected int money;
     protected int wins;
     private Collection collection;
+    private Shop shop;
     private static Account defaultAccount = new Account("user","pass"); // badan bayad sakhte shavad
     protected Player player;
 
@@ -141,5 +142,13 @@ public class Account {
     }
     public void setCollection(Collection collection) {
         this.collection = collection;
+    }
+    public Shop getShop() {
+        if(shop == null)
+            shop = new Shop();
+        return shop;
+    }
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }

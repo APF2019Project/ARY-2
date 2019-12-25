@@ -1,6 +1,7 @@
 package Model;
 
 import Model.Account.Account;
+import Model.Account.Shop;
 import Model.Card.Plant;
 import Model.Card.Zombie;
 import com.gilecode.yagson.YaGson;
@@ -16,6 +17,8 @@ public class Primary {
     public static void preprocess() throws IOException {
         plantJson();
         zombiesJson();
+        Shop.calculateThePriceOfPlants();
+        Shop.calculateThePriceOfZombies();
     }
     public static void plantJson() throws IOException {
         YaGson gson = new YaGson();
@@ -49,7 +52,7 @@ public class Primary {
             gson.toJson(plant, fileWriter);
             fileWriter.write("\n");
         }
-
+        fileWriter.close();
     }
     private static void zombiesJson() throws IOException {
         YaGson gson = new YaGson();
@@ -74,6 +77,6 @@ public class Primary {
             gson.toJson(zombie, fileWriter);
             fileWriter.write("\n");
         }
-
+        fileWriter.close();
     }
 }

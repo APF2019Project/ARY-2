@@ -26,7 +26,7 @@ public class ConsoleOutput {
             return false;
         }
     }
-    public static void commandHandlerBegin(String[] input){
+    public static void commandHandlerBegin(String[] input) throws invalidCardExeption {
         String username = "";
         String password = "";
 
@@ -85,6 +85,9 @@ public class ConsoleOutput {
                 //in tike bayad dar bakhsh entekhabe mode bazi etefagh bioftad
                 Game.accounts[0].getCollection().init(true);
             }
+            if(input[0].equals("shop")){
+                MainMenu.getMenu().enter(ShopMenu.getShopMenu());
+            }
         }
 
         if(MenuHandler.currentMenu instanceof Profile){
@@ -112,7 +115,20 @@ public class ConsoleOutput {
                 Profile.getProfile().show();
             }
         }
-
+        if(MenuHandler.currentMenu instanceof ShopMenu){
+            if(input[0].equals("show") && input[1].equals("shop")){
+                Game.accounts[0].getShop().showShop();
+            }
+            if(input[0].equals("show") && input[1].equals("collection")){
+                Game.accounts[0].getShop().showCollection();
+            }
+            if(input[0].equals("buy")){
+                Game.accounts[0].getShop().buy(input[1]);
+            }
+            if(input[0].equals("money")){
+                Game.accounts[0].getShop().showMoney();
+            }
+        }
         if(MenuHandler.currentMenu instanceof CollectionMenu){
             if(input[0].equals("show") && input[1].equals("hand")){
                 Game.accounts[0].getCollection().showHand();
@@ -141,3 +157,6 @@ public class ConsoleOutput {
         }
     }
 }
+/*
+
+ */
