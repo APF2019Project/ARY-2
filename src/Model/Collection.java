@@ -1,11 +1,11 @@
 package Model;
+import Controller.Game;
 import Model.Card.*;
 import Exception.invalidCardExeption;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Collection {
-    public static ArrayList<Card> allCards = new ArrayList<>();
     public ArrayList<Card> unSelectedCards = new ArrayList<>();
     public ArrayList<Card> selectedCards = new ArrayList<>();
     private boolean isPlantCollection;
@@ -17,9 +17,11 @@ public class Collection {
     public void init(boolean isPlant){
         isPlantCollection = isPlant;
         if(isPlantCollection) {
-            unSelectedCards.addAll(Primary.plants);
+            unSelectedCards.addAll(Game.accounts[0].getShop().plantsBought);
+            //card haye avalie badan bayad ezafe shavad
         }else {
-            unSelectedCards.addAll(Primary.zombies);
+            unSelectedCards.addAll(Game.accounts[0].getShop().zombiesBought);
+            //card haye avalie badan bayad ezafe shavad
         }
     }
     public void showHand(){

@@ -6,6 +6,7 @@ import Model.Account.Player;
 import Model.Card.Plant;
 
 import java.util.Scanner;
+import Exception.*;
 
 public class ConsoleInput {
     public void play(){
@@ -14,7 +15,9 @@ public class ConsoleInput {
         // yekseri chize digar
         while (scan.hasNext()){
             input = scan.nextLine().toLowerCase().trim();
-            ConsoleOutput.commandHandlerBegin(input.split(" "));
+            try {
+                ConsoleOutput.commandHandlerBegin(input.split(" "));
+            }catch (invalidCardExeption e){}
         }
     }
 }

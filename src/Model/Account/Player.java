@@ -1,6 +1,8 @@
 package Model.Account;
 
 import Controller.Game;
+import Controller.Menu.Play;
+import Model.Card.Plant;
 
 import java.util.Scanner;
 
@@ -8,12 +10,18 @@ class ScannerWrapper{
     Scanner scanner;
 }
 public class Player {
-    private String name;
     private int numOfKilledZombie;
     private int sun;
     private int coinForShop;
     private int coinInGame;
     protected static ScannerWrapper outputStream;
+
+    public Player(){
+        numOfKilledZombie = 0;
+        sun = 0;
+        coinForShop = 0; // badan bayad 0 shavad
+        coinInGame = 0;
+    }
 
     public int getNumOfKilledZombie() {
         return numOfKilledZombie;
