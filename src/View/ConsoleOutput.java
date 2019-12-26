@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Game;
+import Controller.GameMode.Day;
 import Controller.Menu.LoginMenu;
 import Controller.Menu.*;
 import Exception.*;
@@ -82,14 +83,11 @@ public class ConsoleOutput {
                 MainMenu.getMenu().enter(Play.getMenu());
                 //initial sazi collection
                 Game.accounts[0].setCollection(new Collection());
-                //in tike bayad dar bakhsh entekhabe mode bazi etefagh bioftad
-                Game.accounts[0].getCollection().init(true);
             }
             if(input[0].equals("shop")){
                 MainMenu.getMenu().enter(ShopMenu.getShopMenu());
             }
         }
-
         if(MenuHandler.currentMenu instanceof Profile){
             if (input[0].equals("change") || input[0].equals("delete") || input[0].equals("create")){
                 String[] userAndPas = scanUserPass();
@@ -145,6 +143,11 @@ public class ConsoleOutput {
                 try {
                     Game.accounts[0].getCollection().remove(input[0].substring(7, input[0].length() - 1));
                 }catch (invalidCardExeption e){}
+            }
+        }
+        if(MenuHandler.currentMenu instanceof Play){
+            if(input[0].equals("day")){
+                Game.accounts[0].getCollection().init(true, new Day());
             }
         }
 

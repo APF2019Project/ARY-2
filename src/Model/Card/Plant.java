@@ -8,7 +8,7 @@ public class Plant extends Card implements Cloneable{
     private int sun;
     private int activateDelay;
     private int timeToReset;
-    private int lastshoot;
+    private int firstShoot;
     private boolean isWater;
     private boolean isSunFlower;
     private boolean isCatTail;
@@ -20,7 +20,6 @@ public class Plant extends Card implements Cloneable{
     private boolean isNut;
     private boolean isFreezing;
     private boolean isCactus;
-    private int age;
     public ArrayList<Weapon> weapons = new ArrayList<>();
 
 
@@ -46,11 +45,11 @@ public class Plant extends Card implements Cloneable{
     }
 
 
-    public int getLastshoot() {
-        return lastshoot;
+    public int getFirstshoot() {
+        return firstShoot;
     }
-    public void setLastshoot(int lastshoot) {
-        this.lastshoot = lastshoot;
+    public void setFirstshoot(int lastshoot) {
+        this.firstShoot = firstShoot;
     }
     public int getSun() {
         return sun;
@@ -136,13 +135,6 @@ public class Plant extends Card implements Cloneable{
     public void setCactus(boolean cactus) {
         isCactus = cactus;
     }
-    public int getAge() {
-        return age;
-    }
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

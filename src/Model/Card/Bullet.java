@@ -4,11 +4,13 @@ public class Bullet {
     private int row;
     private int column;
     private Plant plant;
+    private int damage;
 
-    public Bullet(int row, int column, Plant plant){
+    public Bullet(int row, int column, Plant plant, int damage){
         this.row = row;
         this.column = column;
         this.plant = plant;
+        this.damage = damage;
     }
     public void bulletMove(){
         row += 1;

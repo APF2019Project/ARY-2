@@ -1,5 +1,7 @@
 package Model;
 import Controller.Game;
+import Controller.GameMode.GameMode;
+import Controller.Menu.Menu;
 import Model.Card.*;
 import Exception.invalidCardExeption;
 import java.util.ArrayList;
@@ -10,11 +12,12 @@ public class Collection {
     public ArrayList<Card> selectedCards = new ArrayList<>();
     private boolean isPlantCollection;
     private int maxCard;
+    private GameMode playGameMode;
 
     public Collection(){
     }
 
-    public void init(boolean isPlant){
+    public void init(boolean isPlant, GameMode gameMode){
         isPlantCollection = isPlant;
         if(isPlantCollection) {
             unSelectedCards.addAll(Game.accounts[0].getShop().plantsBought);
@@ -23,6 +26,7 @@ public class Collection {
             unSelectedCards.addAll(Game.accounts[0].getShop().zombiesBought);
             //card haye avalie badan bayad ezafe shavad
         }
+        this.playGameMode = gameMode;
     }
     public void showHand(){
         for(Card card : selectedCards){
@@ -66,5 +70,8 @@ public class Collection {
     }
     public void setPlantCollection(boolean plantCollection) {
         isPlantCollection = plantCollection;
+    }
+    public GameMode getPlayGameMode() {
+        return playGameMode;
     }
 }

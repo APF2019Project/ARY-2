@@ -1,20 +1,47 @@
 package Model.Card;
 
+
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Weapon {
     private int row;
     private int column;
     private int turn;
-    private int numOfBulletInEachTurn;
-    private int cycle;
     private int power;
     private int speedReduce;
     private Plant plant;
+    private int cycle;
+    private int numOfBulletInEachCycle;
+    private int damage;
+    private Random random = new Random();
+    public ArrayList<Boolean> turns = new ArrayList<>();
+
+
+    public Weapon(Plant plant, int power){
+        this.plant = plant;
+        this.power = power;
+    }
 
     public Bullet bulletMaker(){
-        Bullet bullet = new Bullet(row, column, plant);
+        Bullet bullet = new Bullet(row, column, plant, damage);
         return bullet;
     }
 
+    public void turnsGenerate(){
+        turns = new ArrayList<>();
+        for(int i=0 ; i<numOfBulletInEachCycle; i++){
+            turns.add(false);
+        }
+        int numOfTrue = 0;
+        while (numOfTrue < numOfBulletInEachCycle){
+            int index = random.nextInt(numOfBulletInEachCycle);
+            if(!turns.get(index)){
+                turns.set(index, new Boolean(true));
+                numOfTrue += 1;
+            }
+        }
+    }
 
     public int getTurn() {
         return turn;
@@ -22,11 +49,11 @@ public class Weapon {
     public void setTurn(int turn) {
         this.turn = turn;
     }
-    public int getNumOfBulletInEachTurn() {
-        return numOfBulletInEachTurn;
+    public int getNumOfBulletInEachCycle() {
+        return numOfBulletInEachCycle;
     }
-    public void setNumOfBulletInEachTurn(int numOfBulletInEachTurn) {
-        this.numOfBulletInEachTurn = numOfBulletInEachTurn;
+    public void setNumOfBulletInEachCycle(int numOfBulletInEachTurn) {
+        this.numOfBulletInEachCycle = numOfBulletInEachTurn;
     }
     public int getCycle() {
         return cycle;
