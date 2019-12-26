@@ -4,7 +4,7 @@ package Model.Card;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Weapon {
+public class Weapon implements Cloneable{
     private int row;
     private int column;
     private int turn;
@@ -32,7 +32,7 @@ public class Weapon {
 
     public void turnsGenerate(){
         turns = new ArrayList<>();
-        for(int i=0 ; i<numOfBulletInEachCycle; i++){
+        for(int i=0 ; i<cycle; i++){
             turns.add(false);
         }
         int numOfTrue = 0;
@@ -86,5 +86,9 @@ public class Weapon {
     }
     public void setColumn(int column) {
         this.column = column;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

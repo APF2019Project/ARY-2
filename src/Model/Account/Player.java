@@ -18,7 +18,7 @@ public class Player {
     private final int INITIAL_MONEY=999;
     public Player(){
         numOfKilledZombie = 0;
-        sun = 0;
+        sun = INITIAL_MONEY;
         coinForShop = INITIAL_MONEY; // badan bayad 0 shavad
         coinInGame = 0;
     }
