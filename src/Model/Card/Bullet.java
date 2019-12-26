@@ -5,8 +5,10 @@ public class Bullet {
     private int column;
     private int damage;
     private Weapon weapon;
+    int startRow;
     public Bullet(int row, int column, int damage, Weapon weapon){
         this.row = row;
+        this.startRow = row;
         this.column = column;
         this.weapon = weapon;
         this.damage = damage;
@@ -33,5 +35,8 @@ public class Bullet {
     }
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+    public int getStartRow() {
+        return startRow;
     }
 }

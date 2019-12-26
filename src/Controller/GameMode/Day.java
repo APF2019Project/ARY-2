@@ -7,6 +7,7 @@ import Model.Account.Player;
 import Model.Map.Map;
 import Exception.NotPlantException;
 import Exception.noCardSelected;
+import Model.Primary;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -31,7 +32,10 @@ public class Day implements GameMode{
         this.selectedCards = Game.accounts[0].getCollection().selectedCards;
         turnsAfterLastWave = 4;
         zombieAliveNumber = 0;
+        player = Game.accounts[0].getPlayer();
+        enemies.addAll(Primary.zombies); // in ghalat ast va badan bayad dorost shavad
     }
+    @Override
     public void showHand() throws NotPlantException{
             for (int i = 0; i < selectedCards.size(); i++) {
                 Plant plant = (Plant)selectedCards.get(i);
@@ -39,19 +43,37 @@ public class Day implements GameMode{
                         +plant.getSun() + " " + plant.getTimeToReset());
             }
     }
+
+    @Override
     public void select(String name) throws NotPlantException{
         int index = Collection.findCard(name, selectedCards);
-        Plant plant = (Plant) selectedCards.get(index);
-        if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0)
-            selected = plant;
+        if(index != -1) {
+            Plant plant = (Plant) selectedCards.get(index);
+            if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0) {
+                selected = plant;
+                System.out.println("select successfully");
+            } else{
+                System.out.println("you cant select this card");
+            }
+        }else {
+            System.out.println("invalid card name");
+            throw new NotPlantException();
+        }
     }
+    @Override
     public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException{
         if(selected != null) {
             if (map.board[column][row].plant.size() == 0) {
                 try {
                     Plant tmp = (Plant)selected.clone();
+                    for(int i=0 ; i<tmp.weapons.size() ; i++){
+                        tmp.weapons.set(i,(Weapon) tmp.weapons.get(i).clone());  /// clone weapon moshkel darad
+                    }
                     tmp.setRow(row);
                     tmp.setColumn(column);
+                    for(Weapon w : tmp.weapons){
+                        w.turnsGenerate();
+                    }
                     map.board[column][row].plant.add(tmp);
                     plantsInMap.add(tmp);
                     Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
@@ -64,34 +86,37 @@ public class Day implements GameMode{
         }
     }
     private void healthDecrease(){
-        for(Bullet bullet1 : bullets){
-            int r = bullet1.getRow();
+        for(Bullet bullet1 : bullets) {
+            int row = bullet1.getRow();
             int c = bullet1.getColumn();
-            if(map.board[c][r].zombies.size()>0){
-                Zombie randomZ = map.board[c][r].zombies.get(random.nextInt(map.board[c][r].zombies.size()));
-                if(randomZ.getHealth() > bullet1.getWeapon().getDamage()) {
-                    randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
-                }else {
-                    zombieAliveNumber -= 1;
-                    map.board[c][r].zombies.remove(randomZ);
-                    zombies.remove(randomZ);
-                    if(zombieAliveNumber == 0){
-                        turnsAfterLastWave = 0;
+            for (int r = bullet1.getStartRow(); r < row; r++) {
+                if (map.board[c][r].zombies.size() > 0) {
+                    Zombie randomZ = map.board[c][r].zombies.get(random.nextInt(map.board[c][r].zombies.size()));
+                    if (randomZ.getHealth() > bullet1.getWeapon().getDamage()) {
+                        randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
+                    } else {
+                        zombieAliveNumber -= 1;
+                        map.board[c][r].zombies.remove(randomZ);
+                        zombies.remove(randomZ);
+                        if (zombieAliveNumber == 0) {
+                            turnsAfterLastWave = 0;
+                        }
                     }
+                    bullets.remove(bullet1);
                 }
-                bullets.remove(bullet1);
             }
         }
     }
     private void shoot(){
-        for(int i=0 ; i<Map.colNumber; i++){
+        for(int i1=0 ; i1<Map.colNumber; i1++){
             for (int j=0 ; j < Map.rowNumber ; j++) {
-                if(map.board[i][j].plant.size() > 0) {
-                    Plant plant1 = map.board[i][j].plant.get(0);
+                if(map.board[i1][j].plant.size() > 0) {
+                    Plant plant1 = map.board[i1][j].plant.get(0);
                     for (Weapon weapon : plant1.weapons){
-                        if(weapon.turns.get(weapon.getTurn())){
-                            if(shootCondition(i, j)){
-                                bullets.add(weapon.bulletMaker());
+                        if(shootCondition(i1, j)){
+                            if(weapon.turns.get(weapon.getTurn())){
+                                System.out.println("shelik");
+                                 bullets.add(weapon.bulletMaker());
                             }
                         }
                     }
@@ -105,10 +130,10 @@ public class Day implements GameMode{
                     "\tcoordinate: ("+plant1.getColumn()+","+plant1.getRow()+")");
         }
         for (Bullet bullet: bullets){
-            System.out.println(bullet.getRow()+"\t"+bullet.getColumn()+" row and col of bullet");
+            System.out.println(bullet.getColumn()+"\t"+bullet.getRow()+" row and col of bullet");
         }
         for(Zombie zombie : zombies){
-            System.out.println(zombie.getRow()+"\t"+zombie.getColumn()+"\t"+zombie.getHealth()+" zombieee");
+            System.out.println(zombie.getColumn()+"\t"+zombie.getRow()+"\t"+zombie.getHealth()+" zombie  "+zombie.getName()+" jun "+zombie.getHealth());
         }
     }
     private boolean shootCondition(int column, int row){
@@ -133,6 +158,7 @@ public class Day implements GameMode{
         }
     }
     private void waveGenerate(){
+        System.out.println("NEW WAVE START");
         int numOfZombies = random.nextInt(7);
         numOfZombies += 4;
         for(int i=0 ; i<numOfZombies ; i++){
@@ -152,14 +178,25 @@ public class Day implements GameMode{
             if(p.getPermissionTime() > 0)
                 p.setPermissionTime(p.getPermissionTime() - 1);
         }
-        for(Plant p : plantsInMap){
-            for(Weapon w : p.weapons){
-                if(w.getTurn() >= w.getCycle() - 1){
-                    w.setTurn(0);
-                    w.turnsGenerate();
-                }else {w.setTurn(w.getTurn() + 1);}
+
+
+        for(int i1=0 ; i1<Map.colNumber; i1++) {
+            for (int j = 0; j < Map.rowNumber; j++) {
+                if (map.board[i1][j].plant.size() > 0) {
+                    Plant plant1 = map.board[i1][j].plant.get(0);
+                        for (Weapon w : plant1.weapons) {
+                            if (w.getTurn() >= w.getCycle() - 1) {
+                                w.setTurn(0);
+                                w.turnsGenerate();
+                            } else {
+                                w.setTurn(w.getTurn() + 1);
+                            }
+                        }
+                }
             }
         }
+
+
         for(Bullet bullet1 : bullets){
             bulletMove(bullet1);
         }

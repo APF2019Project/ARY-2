@@ -27,7 +27,7 @@ public class ConsoleOutput {
             return false;
         }
     }
-    public static void commandHandlerBegin(String[] input) throws invalidCardExeption {
+    public static void commandHandlerBegin(String[] input) throws invalidCardExeption, NotPlantException, noCardSelected, CloneNotSupportedException {
         String username = "";
         String password = "";
 
@@ -163,7 +163,27 @@ public class ConsoleOutput {
             }
         }
         if(MenuHandler.currentMenu instanceof BattleMenu){
-
+            if(input[0].equals("show") && input[1].equals("hand")){
+                try {
+                    BattleMenu.getBattleMenu().getGameMode().showHand();
+                }catch (NotPlantException e){}
+            }
+            if(input[0].equals("select")){
+                try {
+                    BattleMenu.getBattleMenu().getGameMode().select(input[1]);
+                }catch (NotPlantException e){}
+            }
+            if(input[0].equals("plant")){
+                try {
+                    BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+                }catch (noCardSelected e){}catch (CloneNotSupportedException e){}
+            }
+            if(input[0].equals("end")){
+                BattleMenu.getBattleMenu().getGameMode().endTurn();
+            }
+            if(input[0].equals("show") && input[1].equals("lawn")){
+                BattleMenu.getBattleMenu().getGameMode().showLawn();
+            }
         }
         if(input[0].equals("exit")){
             if(MenuHandler.currentMenu instanceof  LoginMenu)
@@ -184,5 +204,36 @@ ali
 123
 shop
 buy repeater
-
+buy Peashooter
+buy Snow-pea
+buy Cabbage-pult
+buy Cactus
+buy Gatling-Pea
+buy Scaredy-shroom
+buy Kernel-pult
+exit
+play
+day
+select repeater
+select Peashooter
+select Snow-pea
+select Cabbage-pult
+select Cactus
+select Gatling-Pea
+select Scaredy-shroom
+select Kernel-pult
+play
+select repeater
+plant 2 2
+plant 3 3
+plant 0 4
+plant 1 1
+plant 4 5
+plant 4 0
+end turn
+end turn
+end turn
+end turn
+end turn
+show lawn
  */

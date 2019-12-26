@@ -17,7 +17,7 @@ public class ConsoleInput {
             input = scan.nextLine().toLowerCase().trim();
             try {
                 ConsoleOutput.commandHandlerBegin(input.split(" "));
-            }catch (invalidCardExeption e){}
+            }catch (Exception e){}
         }
     }
 }
