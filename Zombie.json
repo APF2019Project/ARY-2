@@ -1,0 +1,15 @@
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Zombie","health":2,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":3,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Football Zombie","health":4,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Buckethead Zombie","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Conehead Zombie","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Zomboni","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Catapult Zombie","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":0,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Bungee Zombie","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"balloon Zombie","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":2,"startDelay":false,"isWater":false,"name":"Newspaper Zombie","health":2,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":3,"startDelay":false,"isWater":false,"name":"Target Zombie","health":3,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":4,"startDelay":false,"isWater":false,"name":"Screen door Zombie","health":2,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":1,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Giga-gargantuar","health":6,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":false,"name":"Pogo Zombie","health":2,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":0,"startDelay":false,"isWater":true,"name":"Snorkel Zombie","health":2,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
+{"@type":"Model.Card.Zombie","@val":{"speed":2,"shieldHealth":2,"startDelay":false,"isWater":true,"name":"Dolphine Rider Zombie","health":2,"coolDown":0,"currentCoolDown":0,"damage":0,"price":0}}
