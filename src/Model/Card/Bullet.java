@@ -3,13 +3,12 @@ package Model.Card;
 public class Bullet {
     private int row;
     private int column;
-    private Plant plant;
     private int damage;
-
-    public Bullet(int row, int column, Plant plant, int damage){
+    private Weapon weapon;
+    public Bullet(int row, int column, int damage, Weapon weapon){
         this.row = row;
         this.column = column;
-        this.plant = plant;
+        this.weapon = weapon;
         this.damage = damage;
     }
     public void bulletMove(){
@@ -29,10 +28,10 @@ public class Bullet {
     public void setColumn(int column) {
         this.column = column;
     }
-    public Plant getPlant() {
-        return plant;
+    public Weapon getWeapon() {
+        return weapon;
     }
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 }

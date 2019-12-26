@@ -66,8 +66,8 @@ public class Day implements GameMode{
             int c = bullet1.getColumn();
             if(map.board[c][r].zombies.size()>0){
                 Zombie randomZ = map.board[c][r].zombies.get(random.nextInt(map.board[c][r].zombies.size()));
-                if(randomZ.getHealth() > bullet1.getPlant().getDamage()) {
-                    randomZ.setHealth(randomZ.getHealth() - bullet1.getPlant().getDamage());
+                if(randomZ.getHealth() > bullet1.getWeapon().getDamage()) {
+                    randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
                 }else {map.board[c][r].zombies.remove(randomZ);}
                 bullets.remove(bullet1);
             }

@@ -10,7 +10,6 @@ public class Weapon {
     private int turn;
     private int power;
     private int speedReduce;
-    private Plant plant;
     private int cycle;
     private int numOfBulletInEachCycle;
     private int damage;
@@ -18,13 +17,12 @@ public class Weapon {
     public ArrayList<Boolean> turns = new ArrayList<>();
 
 
-    public Weapon(Plant plant, int power){
-        this.plant = plant;
+    public Weapon(int power){
         this.power = power;
     }
 
     public Bullet bulletMaker(){
-        Bullet bullet = new Bullet(row, column, plant, damage);
+        Bullet bullet = new Bullet(row, column, damage, this);
         return bullet;
     }
 
@@ -73,10 +71,10 @@ public class Weapon {
     public void setSpeedReduce(int speedReduse) {
         this.speedReduce = speedReduce;
     }
-    public Plant getPlant() {
-        return plant;
+    public int getDamage() {
+        return damage;
     }
-    public void setPlant(Plant plant) {
-        this.plant = plant;
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 }

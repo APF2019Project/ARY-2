@@ -23,7 +23,6 @@ public class Primary {
     }
     public static void plantJson() throws IOException {
         YaGson gson = new YaGson();
-        Weapon weapon = new Weapon();
         plants.add(new Plant("Peashooter",2,2,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
         plants.add(new Plant("Snow pea",3,3,3,3,0,false,0,false,false ,false,false, true, false, false, false, false,false));
         plants.add(new Plant("Cabbage-pult",2,3,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
