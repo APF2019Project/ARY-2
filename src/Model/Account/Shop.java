@@ -70,6 +70,8 @@ public class Shop {
                     plantsBought.add((Plant) cardsNotBuy.get(index));
                     cardsNotBuy.remove(index);
                     player.setCoinForShop(player.getCoinForShop() - price);
+                    System.out.println("card bought successfully");
+
                 }
             } else if (cardsNotBuy.get(index) instanceof Zombie) {
                 Zombie zombie = (Zombie) cardsNotBuy.get(index);
@@ -79,9 +81,12 @@ public class Shop {
                     zombiesBought.add((Zombie) cardsNotBuy.get(index));
                     cardsNotBuy.remove(index);
                     player.setCoinForShop(player.getCoinForShop() - price);
+                    System.out.println("card bought successfully");
                 }
             }
-        }catch (Exception e){throw new invalidCardExeption();}
+        }catch (Exception e){
+            System.out.println("invalid card name");
+            throw new invalidCardExeption();}
     }
     public void showMoney(){
         System.out.println("Your current money is:"+player.getCoinForShop());
