@@ -16,6 +16,11 @@ public class MenuHandler {
 
         MainMenu.getMenu().addSubMenu(Profile.getProfile());
         MainMenu.getMenu().addSubMenu(ShopMenu.getShopMenu());
+        MainMenu.getMenu().addSubMenu(Play.getMenu());
+
+        Play.getMenu().addSubMenu(CollectionMenu.getCollectionMenu());
+
+        CollectionMenu.getCollectionMenu().addSubMenu(BattleMenu.getBattleMenu());
 
         currentMenu = LoginMenu.getLoginMenu();
 

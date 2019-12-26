@@ -152,21 +152,25 @@ public class ConsoleOutput {
 //                    case "water":
 //                        BattleMenu.getBattleMenu().setGameMode(new Water());
                 }
-
                 MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
             }
         }
         if(MenuHandler.currentMenu instanceof Play){
+            System.out.println("you enter Play Menu");
             if(input[0].equals("day")){
-                Game.accounts[0].getCollection().init(true, "day");
+                Game.accounts[0].getCollection().init(true, "day", 7);
+                MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
             }
         }
+        if(MenuHandler.currentMenu instanceof BattleMenu){
 
+        }
         if(input[0].equals("exit")){
             if(MenuHandler.currentMenu instanceof  LoginMenu)
                 System.exit(0);
             else {
                 MenuHandler.currentMenu.exit();
+                System.out.println(MenuHandler.currentMenu);
             }
         }
     }
@@ -180,5 +184,24 @@ ali
 123
 shop
 buy repeater
+buy Peashooter
+buy Snow-pea
+buy Cabbage-pult
+buy Cactus
+buy Gatling-Pea
+buy Scaredy-shroom
+buy Kernel-pult
+exit
+play
+day
+select repeater
+select Peashooter
+select Snow-pea
+select Cabbage-pult
+select Cactus
+select Gatling-Pea
+select Scaredy-shroom
+select Kernel-pult
+play
 
  */

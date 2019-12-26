@@ -17,8 +17,9 @@ public class Collection {
     public Collection(){
     }
 
-    public void init(boolean isPlant, String gameMode){
+    public void init(boolean isPlant, String gameMode, int maxCard){
         isPlantCollection = isPlant;
+        this.maxCard = maxCard;
         if(isPlantCollection) {
             unSelectedCards.addAll(Game.accounts[0].getShop().plantsBought);
             //card haye avalie badan bayad ezafe shavad
@@ -37,9 +38,18 @@ public class Collection {
     }
     public void select(String name) throws invalidCardExeption{
         int index = findCard(name, unSelectedCards);
-        selectedCards.add(unSelectedCards.get(index));
-        unSelectedCards.remove(index);
-        System.out.println("select successfully");
+        if(index != -1) {
+            if(selectedCards.size() < maxCard ) {
+                selectedCards.add(unSelectedCards.get(index));
+                unSelectedCards.remove(index);
+                System.out.println("select successfully");
+            }else {
+                System.out.println("you can select maximum 7 cards");
+            }
+        }else {
+            System.out.println("invalid card name");
+            throw new invalidCardExeption();
+        }
     }
     public void showCollection(){
         for (Card card : unSelectedCards){
