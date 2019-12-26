@@ -61,26 +61,27 @@ public class Shop {
         int price = 0;
 
         ArrayList<Card> tmp = new ArrayList<>();
-        if(cardsNotBuy.get(index) instanceof Plant){
-            Plant plant = (Plant)cardsNotBuy.get(index);
-            price = plant.getSun() * plant.getCoolDown() * plant.getHealth() + 1;
-            if(player.getCoinForShop() >= price) {
-                cardsBought.add(cardsNotBuy.get(index));
-                plantsBought.add((Plant) cardsNotBuy.get(index));
-                cardsNotBuy.remove(index);
-                player.setCoinForShop(player.getCoinForShop()-price);
+        try {
+            if (cardsNotBuy.get(index) instanceof Plant) {
+                Plant plant = (Plant) cardsNotBuy.get(index);
+                price = plant.getSun() * plant.getCoolDown() * plant.getHealth() + 1;
+                if (player.getCoinForShop() >= price) {
+                    cardsBought.add(cardsNotBuy.get(index));
+                    plantsBought.add((Plant) cardsNotBuy.get(index));
+                    cardsNotBuy.remove(index);
+                    player.setCoinForShop(player.getCoinForShop() - price);
+                }
+            } else if (cardsNotBuy.get(index) instanceof Zombie) {
+                Zombie zombie = (Zombie) cardsNotBuy.get(index);
+                price = zombie.getHealth() * (1 + zombie.getSpeed()) * 10;
+                if (player.getCoinForShop() >= price) {
+                    cardsBought.add(cardsNotBuy.get(index));
+                    zombiesBought.add((Zombie) cardsNotBuy.get(index));
+                    cardsNotBuy.remove(index);
+                    player.setCoinForShop(player.getCoinForShop() - price);
+                }
             }
-        }
-        else if(cardsNotBuy.get(index) instanceof Zombie){
-            Zombie zombie = (Zombie) cardsNotBuy.get(index);
-            price = zombie.getHealth() * (1 + zombie.getSpeed()) * 10;
-            if(player.getCoinForShop() >= price) {
-                cardsBought.add(cardsNotBuy.get(index));
-                zombiesBought.add((Zombie) cardsNotBuy.get(index));
-                cardsNotBuy.remove(index);
-                player.setCoinForShop(player.getCoinForShop()-price);
-            }
-        }
+        }catch (Exception e){throw new invalidCardExeption();}
     }
     public void showMoney(){
         System.out.println("Your current money is:"+player.getCoinForShop());

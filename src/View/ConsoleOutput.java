@@ -172,5 +172,13 @@ public class ConsoleOutput {
     }
 }
 /*
+create account
+ali
+123
+login
+ali
+123
+shop
+
 
  */
