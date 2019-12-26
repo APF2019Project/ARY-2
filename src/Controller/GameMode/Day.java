@@ -23,12 +23,14 @@ public class Day implements GameMode{
     Random random = new Random();
     private int turn;
     private int turnsAfterLastWave;
+    private int zombieAliveNumber;
 
     public Day(){
         turn = 0;
         map = generateMap();
         this.selectedCards = Game.accounts[0].getCollection().selectedCards;
         turnsAfterLastWave = 4;
+        zombieAliveNumber = 0;
     }
     public void showHand() throws NotPlantException{
             for (int i = 0; i < selectedCards.size(); i++) {
@@ -40,7 +42,7 @@ public class Day implements GameMode{
     public void select(String name) throws NotPlantException{
         int index = Collection.findCard(name, selectedCards);
         Plant plant = (Plant) selectedCards.get(index);
-        if (player.getSun() >= plant.getSun() && plant.getTimeToReset() == 0)
+        if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0)
             selected = plant;
     }
     public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException{
@@ -53,6 +55,7 @@ public class Day implements GameMode{
                     map.board[column][row].plant.add(tmp);
                     plantsInMap.add(tmp);
                     Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
+                    selected.setPermissionTime(selected.getTimeToReset());
                 }catch (CloneNotSupportedException e){}
             }
         } else {
@@ -68,7 +71,14 @@ public class Day implements GameMode{
                 Zombie randomZ = map.board[c][r].zombies.get(random.nextInt(map.board[c][r].zombies.size()));
                 if(randomZ.getHealth() > bullet1.getWeapon().getDamage()) {
                     randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
-                }else {map.board[c][r].zombies.remove(randomZ);}
+                }else {
+                    zombieAliveNumber -= 1;
+                    map.board[c][r].zombies.remove(randomZ);
+                    zombies.remove(randomZ);
+                    if(zombieAliveNumber == 0){
+                        turnsAfterLastWave = 0;
+                    }
+                }
                 bullets.remove(bullet1);
             }
         }
@@ -113,8 +123,11 @@ public class Day implements GameMode{
         try {
             Zombie zombie = (Zombie) enemies.get(random.nextInt(enemies.size())).clone();
             zombie.setRow(Map.rowNumber - 1);
-            zombie.setColumn(random.nextInt(Map.colNumber));
+            int column = random.nextInt(Map.colNumber);
+            zombie.setColumn(column);
+            zombieAliveNumber += 1;
             zombies.add(zombie);
+            map.board[column][Map.rowNumber - 1].zombies.add(zombie);
         } catch (CloneNotSupportedException e) {
 
         }
@@ -134,9 +147,14 @@ public class Day implements GameMode{
     public void endTurn(){
         turn += 1;
         turnsAfterLastWave += 1;
+        for(Card card :selectedCards){
+            Plant p = (Plant) card;
+            if(p.getPermissionTime() > 0)
+                p.setPermissionTime(p.getPermissionTime() - 1);
+        }
         for(Plant p : plantsInMap){
             for(Weapon w : p.weapons){
-                if(w.getTurn() >= w.getCycle()){
+                if(w.getTurn() >= w.getCycle() - 1){
                     w.setTurn(0);
                     w.turnsGenerate();
                 }else {w.setTurn(w.getTurn() + 1);}

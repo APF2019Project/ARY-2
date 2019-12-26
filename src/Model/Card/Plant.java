@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Plant extends Card implements Cloneable{
     private int sun;
     private int activateDelay;
+    private int permissionTime;
     private int timeToReset;
     private int firstShoot;
     private boolean isWater;
@@ -138,6 +139,13 @@ public class Plant extends Card implements Cloneable{
     public void setCactus(boolean cactus) {
         isCactus = cactus;
     }
+    public int getPermissionTime() {
+        return permissionTime;
+    }
+    public void setPermissionTime(int permissionTime) {
+        this.permissionTime = permissionTime;
+    }
+
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
