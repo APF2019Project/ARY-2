@@ -8,8 +8,8 @@ public class Weapon {
     private int row;
     private int column;
     private int turn;
-    private int power;
-    private int speedReduce;
+    private int speedReduce; // agar 1 bud taghir nemikonad agar 2 bud nesf mishavad
+    private Plant plant;
     private int cycle;
     private int numOfBulletInEachCycle;
     private int damage;
@@ -17,8 +17,12 @@ public class Weapon {
     public ArrayList<Boolean> turns = new ArrayList<>();
 
 
-    public Weapon(int power){
-        this.power = power;
+    public Weapon(int cycle,int speedReduce,int numOfBulletInEachCycle,int damage){
+        this.cycle=cycle;
+        this.speedReduce=speedReduce;
+        this.numOfBulletInEachCycle=numOfBulletInEachCycle;
+        this.damage=damage;
+        this.turn = -1;
     }
 
     public Bullet bulletMaker(){
@@ -59,12 +63,6 @@ public class Weapon {
     public void setCycle(int cycle) {
         this.cycle = cycle;
     }
-    public int getPower() {
-        return power;
-    }
-    public void setPower(int power) {
-        this.power = power;
-    }
     public int getSpeedReduce() {
         return speedReduce;
     }
@@ -76,5 +74,17 @@ public class Weapon {
     }
     public void setDamage(int damage) {
         this.damage = damage;
+    }
+    public int getRow() {
+        return row;
+    }
+    public void setRow(int row) {
+        this.row = row;
+    }
+    public int getColumn() {
+        return column;
+    }
+    public void setColumn(int column) {
+        this.column = column;
     }
 }
