@@ -23,30 +23,30 @@ public class Primary {
     }
     public static void plantJson() throws IOException {
         YaGson gson = new YaGson();
-        plants.add(new Plant("Peashooter",2,2,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Snow pea",3,3,3,3,0,false,0,false,false ,false,false, true, false, false, false, false,false));
-        plants.add(new Plant("Cabbage-pult",2,3,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Repeater",4,4,3,3,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Threepeater",5,4,4,4,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Cactus",5,4,5,2,0,false,0,false,false ,false,false, false, false, false, false, false,true));
-        plants.add(new Plant("Gatling Pea",3,4,5,5,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Scaredy-shroom",1,2,1,2,0,false,0,false,false ,false,false, false, true, false, false, false,false));
-        plants.add(new Plant("Kernel-pult",2,3,3,4,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Split pea",3,4,4,0,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Explode-o-nut",3,5,4,0,0,false,0,false,false ,false,false, false, false, false, true, false,false));
-        plants.add(new Plant("Melon-pult",3,3,3,4,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Lily Pad",1,1,0,2,0,true,0,false,false ,true,false, false, false, false, false, false,false));
-        plants.add(new Plant("Winter Melon",3,5,4,4,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Wall-nut",4,4,2,0,0,false,0,false,false ,false,false, false, false, false, true, false,false));
-        plants.add(new Plant("Tangle Kelp",0,3,3,0,0,false,0,false,false ,false,false, false, false, true, false, false,false));
-        plants.add(new Plant("Tall-nut",6,6,4,0,0,false,0,false,false ,false,false, false, false, false, true, false,false));
-        plants.add(new Plant("Cattail",3,5,5,0,0,false,0,false,true ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Potato Mine",1,3,2,0,1,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Cherry Bomb",0,4,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Magnet-shroom",2,4,4,3,0,false,0,false,false ,false,true, false, false, false, false, false,false));
-        plants.add(new Plant("Sunflower",2,2,1,2,0,false,0,true,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Twin Sunflower",2,5,3,2,0,false,0,true,false ,false,false, false, false, false, false, false,false));
-        plants.add(new Plant("Jalapeno",0,5,4,0,0,false,0,false,false ,false,false, false, false, false, false, false,false));
+        plants.add(new Plant("Peashooter",2,2,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(2,1,1,1)));
+        plants.add(new Plant("Snow-pea",3,3,3,3,0,false,0,false,false ,false,false, true, false, false, false, false,false,new Weapon(3,2,1,1)));
+        plants.add(new Plant("Cabbage-pult",2,3,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(2,1,1,2)));
+        plants.add(new Plant("Repeater",4,4,3,3,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(3,1,2,1)));
+        plants.add(new Plant("Threepeater",5,4,4,4,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(4,1,1,1)));
+        plants.add(new Plant("Cactus",5,4,5,2,0,false,0,false,false ,false,false, false, false, false, false, false,true,new Weapon(2,1,1,1)));
+        plants.add(new Plant("Gatling-Pea",3,4,5,5,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(5,1,4,1)));
+        plants.add(new Plant("Scaredy-shroom",1,2,1,2,0,false,0,false,false ,false,false, false, true, false, false, false,false,new Weapon(2,1,1,1)));
+        plants.add(new Plant("Kernel-pult",2,3,3,4,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(4,1,1,0)));
+        //plants.add(new Plant("Split-pea",3,4,4,0,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(1,)));
+        //plants.add(new Plant("Explode-o-nut",3,5,4,0,0,false,0,false,false ,false,false, false, false, false, true, false,false,new Weapon(0,0,0,0)));
+        plants.add(new Plant("Melon-pult",3,3,3,4,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(4,1,1,3)));
+        //plants.add(new Plant("Lily-Pad",1,1,0,2,0,true,0,false,false ,true,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+        plants.add(new Plant("Winter-Melon",3,5,4,4,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(4,2,1,3)));
+        //plants.add(new Plant("Wall-nut",4,4,2,0,0,false,0,false,false ,false,false, false, false, false, true, false,false,new Weapon(0,0,0,0)));
+        //plants.add(new Plant("Tangle-Kelp",0,3,3,0,0,false,0,false,false ,false,false, false, false, true, false, false,false,new Weapon(0,0,0,0)));
+        //plants.add(new Plant("Tall-nut",6,6,4,0,0,false,0,false,false ,false,false, false, false, false, true, false,false,new Weapon(0,0,0,0)));
+        //plants.add(new Plant("Cattail",3,5,5,0,0,false,0,false,true ,false,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+        //plants.add(new Plant("Potato-Mine",1,3,2,0,1,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+       // plants.add(new Plant("Cherry-Bomb",0,4,2,2,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+       // plants.add(new Plant("Magnet-shroom",2,4,4,3,0,false,0,false,false ,false,true, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+        plants.add(new Plant("Sunflower",2,2,1,2,0,false,0,true,false ,false,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+        //plants.add(new Plant("Twin-Sunflower",2,5,3,2,0,false,0,true,false ,false,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
+        //plants.add(new Plant("Jalapeno",0,5,4,0,0,false,0,false,false ,false,false, false, false, false, false, false,false,new Weapon(0,0,0,0)));
         FileWriter fileWriter = new FileWriter("Plant.json", false);
         for (Plant plant :
                 plants) {
@@ -58,20 +58,20 @@ public class Primary {
     private static void zombiesJson() throws IOException {
         YaGson gson = new YaGson();
         zombies.add(new Zombie("Zombie",2,2,0,false));
-        zombies.add(new Zombie("Football Zombie",4,3,0,false));
-        zombies.add(new Zombie("Buckethead Zombie",3, 2,0,false));
-        zombies.add(new Zombie("Conehead Zombie",3,2,0,false));
+        zombies.add(new Zombie("Football-Zombie",4,3,0,false));
+        zombies.add(new Zombie("Buckethead-Zombie",3, 2,0,false));
+        zombies.add(new Zombie("Conehead-Zombie",3,2,0,false));
         zombies.add(new Zombie("Zomboni",3,2,0,false));
-        zombies.add(new Zombie("Catapult Zombie",3,2,0,false));
-        zombies.add(new Zombie("Bungee Zombie",3,0 ,0,false));
-        zombies.add(new Zombie("balloon Zombie",3,2,0,false));
-        zombies.add(new Zombie("Newspaper Zombie",2,2,2,false));
-        zombies.add(new Zombie("Target Zombie",3,2,3,false));
-        zombies.add(new Zombie("Screen door Zombie",2,2,4,false));
+        zombies.add(new Zombie("Catapult-Zombie",3,2,0,false));
+        zombies.add(new Zombie("Bungee-Zombie",3,0 ,0,false));
+        zombies.add(new Zombie("balloon-Zombie",3,2,0,false));
+        zombies.add(new Zombie("Newspaper-Zombie",2,2,2,false));
+        zombies.add(new Zombie("Target-Zombie",3,2,3,false));
+        zombies.add(new Zombie("Screen-door-Zombie",2,2,4,false));
         zombies.add(new Zombie("Giga-gargantuar",6,1,0,false));
-        zombies.add(new Zombie("Pogo Zombie",2,2,0,false));
-        zombies.add(new Zombie("Snorkel Zombie",2,2,0,true));
-        zombies.add(new Zombie("Dolphine Rider Zombie",2,2,2,true));
+        zombies.add(new Zombie("Pogo-Zombie",2,2,0,false));
+        zombies.add(new Zombie("Snorkel-Zombie",2,2,0,true));
+        zombies.add(new Zombie("Dolphine-Rider-Zombie",2,2,2,true));
         FileWriter fileWriter = new FileWriter("Zombie.json", false);
         for (Zombie zombie :
                 zombies) {
