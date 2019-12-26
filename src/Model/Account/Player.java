@@ -15,11 +15,11 @@ public class Player {
     private int coinForShop;
     private int coinInGame;
     protected static ScannerWrapper outputStream;
-
+    private final int INITIAL_MONEY=999;
     public Player(){
         numOfKilledZombie = 0;
         sun = 0;
-        coinForShop = 0; // badan bayad 0 shavad
+        coinForShop = INITIAL_MONEY; // badan bayad 0 shavad
         coinInGame = 0;
     }
 
