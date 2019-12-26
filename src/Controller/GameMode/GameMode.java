@@ -3,4 +3,5 @@ import Model.Map.Map;
 public interface GameMode {
     Map generateMap();
     void handleWin();
+    void endTurn();
 }

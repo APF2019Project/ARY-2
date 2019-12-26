@@ -4,7 +4,7 @@ import Model.Map.Map;
 
 import java.util.ArrayList;
 
-public class Plant extends Card{
+public class Plant extends Card implements Cloneable{
     private int sun;
     private int activateDelay;
     private int timeToReset;
@@ -20,7 +20,9 @@ public class Plant extends Card{
     private boolean isNut;
     private boolean isFreezing;
     private boolean isCactus;
+    private int age;
     public ArrayList<Weapon> weapons = new ArrayList<>();
+
 
     public Plant(String name,int health,int cooldown,int sun,int timeToReset,int activateDelay,boolean isWater,int price,boolean isSunFlower,boolean isCatTail, boolean isLilyPad,boolean hasMagnet,boolean isSnowPea,boolean isScaredMushroom,boolean isTangleKelp, boolean isNut,boolean isFreezing,boolean isCactus){
         super.setName(name);
@@ -133,5 +135,15 @@ public class Plant extends Card{
     }
     public void setCactus(boolean cactus) {
         isCactus = cactus;
+    }
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

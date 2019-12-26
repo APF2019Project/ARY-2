@@ -1,10 +1,11 @@
 package Model.Card;
 
-public class Zombie extends Card {
+public class Zombie extends Card implements Cloneable {
     private int speed;
     private int shieldHealth;
     private boolean startDelay;
     private boolean isWater;
+
 
     public int getShieldHealth() {
         return shieldHealth;
@@ -43,5 +44,9 @@ public class Zombie extends Card {
         setSpeed(speed);
         setShieldHealth(shieldHealth);
         setWater(isWater);
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
