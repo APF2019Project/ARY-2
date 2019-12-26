@@ -184,24 +184,5 @@ ali
 123
 shop
 buy repeater
-buy Peashooter
-buy Snow-pea
-buy Cabbage-pult
-buy Cactus
-buy Gatling-Pea
-buy Scaredy-shroom
-buy Kernel-pult
-exit
-play
-day
-select repeater
-select Peashooter
-select Snow-pea
-select Cabbage-pult
-select Cactus
-select Gatling-Pea
-select Scaredy-shroom
-select Kernel-pult
-play
 
  */
