@@ -136,18 +136,29 @@ public class ConsoleOutput {
             }
             if(input[0].length() >= 6 && input[0].substring(0, 6).equals("select")){
                 try {
-                    Game.accounts[0].getCollection().select(input[0].substring(7, input[0].length() - 1));
+                    Game.accounts[0].getCollection().select(input[1]);
                 }catch (invalidCardExeption e){}
             }
             if(input[0].length() >= 6 && input[0].substring(0, 6).equals("remove")){
                 try {
-                    Game.accounts[0].getCollection().remove(input[0].substring(7, input[0].length() - 1));
+                    Game.accounts[0].getCollection().remove(input[1]);
                 }catch (invalidCardExeption e){}
+            }
+            if(input[0].equals("play")){
+                switch (Game.accounts[0].getCollection().getPlayGameMode()){
+                    case "day":
+                        BattleMenu.getBattleMenu().setGameMode(new Day());
+                        break;
+//                    case "water":
+//                        BattleMenu.getBattleMenu().setGameMode(new Water());
+                }
+
+                MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
             }
         }
         if(MenuHandler.currentMenu instanceof Play){
             if(input[0].equals("day")){
-                Game.accounts[0].getCollection().init(true, new Day());
+                Game.accounts[0].getCollection().init(true, "day");
             }
         }
 

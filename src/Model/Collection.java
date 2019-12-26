@@ -12,12 +12,12 @@ public class Collection {
     public ArrayList<Card> selectedCards = new ArrayList<>();
     private boolean isPlantCollection;
     private int maxCard;
-    private GameMode playGameMode;
+    private String playGameMode;
 
     public Collection(){
     }
 
-    public void init(boolean isPlant, GameMode gameMode){
+    public void init(boolean isPlant, String gameMode){
         isPlantCollection = isPlant;
         if(isPlantCollection) {
             unSelectedCards.addAll(Game.accounts[0].getShop().plantsBought);
@@ -71,7 +71,7 @@ public class Collection {
     public void setPlantCollection(boolean plantCollection) {
         isPlantCollection = plantCollection;
     }
-    public GameMode getPlayGameMode() {
+    public String getPlayGameMode() {
         return playGameMode;
     }
 }
