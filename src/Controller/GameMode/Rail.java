@@ -127,4 +127,9 @@ public class Rail implements GameMode {
     public void handleWin() {
 
     }
+
+    @Override
+    public void waveGenerate() {
+
+    }
 }
