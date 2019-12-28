@@ -235,5 +235,20 @@ end turn
 end turn
 end turn
 end turn
+end turn
+end turn
+end turn
+show lawn
+end turn
+show lawn
+end turn
+show lawn
+end turn
+show lawn
+end turn
+show lawn
+end turn
+show lawn
+end turn
 show lawn
  */

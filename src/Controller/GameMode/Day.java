@@ -66,11 +66,18 @@ public class Day implements GameMode{
             if (map.board[column][row].plant.size() == 0) {
                 try {
                     Plant tmp = (Plant)selected.clone();
-                    for(int i=0 ; i<tmp.weapons.size() ; i++){
-                        tmp.weapons.set(i,(Weapon) tmp.weapons.get(i).clone());  /// clone weapon moshkel darad
-                    }
+                    ArrayList<Weapon> weapons = new ArrayList<>();
                     tmp.setRow(row);
                     tmp.setColumn(column);
+                    for(int i=0 ; i<tmp.weapons.size() ; i++){
+                        Weapon tmpWeapon = (Weapon) tmp.weapons.get(i);
+                        tmpWeapon = (Weapon) tmpWeapon.clone();
+                        tmpWeapon.setRow(row);
+                        tmpWeapon.setColumn(column);
+                        weapons.add(tmpWeapon);
+                    }
+                    tmp.weapons = weapons;
+
                     for(Weapon w : tmp.weapons){
                         w.turnsGenerate();
                     }
@@ -86,7 +93,8 @@ public class Day implements GameMode{
         }
     }
     private void healthDecrease(){
-        for(Bullet bullet1 : bullets) {
+        for(int s=0 ; s < bullets.size() ; s++) {
+            Bullet bullet1 = bullets.get(s);
             int row = bullet1.getRow();
             int c = bullet1.getColumn();
             for (int r = bullet1.getStartRow(); r < row; r++) {
@@ -102,7 +110,7 @@ public class Day implements GameMode{
                             turnsAfterLastWave = 0;
                         }
                     }
-                    bullets.remove(bullet1);
+                    break;
                 }
             }
         }
@@ -115,8 +123,7 @@ public class Day implements GameMode{
                     for (Weapon weapon : plant1.weapons){
                         if(shootCondition(i1, j)){
                             if(weapon.turns.get(weapon.getTurn())){
-                                System.out.println("shelik");
-                                 bullets.add(weapon.bulletMaker());
+                                bullets.add(weapon.bulletMaker());
                             }
                         }
                     }
@@ -129,9 +136,9 @@ public class Day implements GameMode{
             System.out.println(plant1.getName()+"\thealth: "+plant1.getHealth()+
                     "\tcoordinate: ("+plant1.getColumn()+","+plant1.getRow()+")");
         }
-        for (Bullet bullet: bullets){
-            System.out.println(bullet.getColumn()+"\t"+bullet.getRow()+" row and col of bullet");
-        }
+//        for (Bullet bullet: bullets){
+//            System.out.println(bullet.getColumn()+"\t"+bullet.getRow()+" col and row of bullet  "+bullet);
+//        }
         for(Zombie zombie : zombies){
             System.out.println(zombie.getColumn()+"\t"+zombie.getRow()+"\t"+zombie.getHealth()+" zombie  "+zombie.getName()+" jun "+zombie.getHealth());
         }
