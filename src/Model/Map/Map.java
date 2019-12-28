@@ -13,8 +13,8 @@ public class Map {
 
     public static Map generateDay(){
         Map map = new Map();
-        for (int i=0 ; i<colNumber ; i++)
-            for (int j=0 ; j<rowNumber; j++){
+        for (int i=0 ; i<=colNumber ; i++)
+            for (int j=0 ; j<=rowNumber; j++){
                 map.board[i][j] =new Square(i, j);
             }
         return map;
@@ -22,8 +22,8 @@ public class Map {
 
     public static Map generateWater(){
         Map map = new Map();
-        for (int i=0 ; i<colNumber ; i++)
-            for (int j=0 ; j<rowNumber; j++){
+        for (int i=0 ; i<=colNumber ; i++)
+            for (int j=0 ; j<=rowNumber; j++){
                 map.board[i][j] =new Square(i, j);
                 if(i == 2 || i == 3)
                     map.board[i][j].setWater(true);

@@ -46,6 +46,8 @@ public class Zombie extends Card implements Cloneable {
         setWater(isWater);
     }
 
+    public Zombie(){}
+
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }

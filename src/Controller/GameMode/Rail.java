@@ -27,7 +27,7 @@ public class Rail implements GameMode {
     ArrayList<Bullet> bullets = new ArrayList<>();
     ArrayList<Zombie> zombies = new ArrayList<>();
     ArrayList<Plant> plantsInMap = new ArrayList<>();
-    Random random=new Random();
+    Random random = new Random();
 
     public void remove(int column,int row){
         Square square=map.board[row][column];

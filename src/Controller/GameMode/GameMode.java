@@ -11,4 +11,5 @@ public interface GameMode  {
     void showLawn();
     void endTurn();
     void handleWin();
+    void waveGenerate();
 }

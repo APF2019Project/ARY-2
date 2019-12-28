@@ -169,7 +169,8 @@ public class Day implements GameMode{
 
         }
     }
-    private void waveGenerate(){
+    @Override
+    public void waveGenerate(){
         System.out.println("NEW WAVE START");
         int numOfZombies = random.nextInt(7);
         numOfZombies += 4;
