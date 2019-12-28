@@ -15,6 +15,7 @@ import java.util.Random;
 public class Day implements GameMode{
     private Plant selected;
     private ArrayList<Card> selectedCards;
+    private ArrayList<Card> cardsAvailable;
     private Player player;
     private Map map;
     ArrayList<Zombie> enemies = new ArrayList<>(); // badan bayad dar canstructor load shavad
@@ -59,6 +60,10 @@ public class Day implements GameMode{
             System.out.println("invalid card name");
             throw new NotPlantException();
         }
+    }
+    @Override
+    public void select(int a) {
+
     }
     @Override
     public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException{
@@ -168,7 +173,6 @@ public class Day implements GameMode{
     private void bulletMove(Bullet bullet1){
         bullet1.setRow(bullet1.getRow() + 1);
     }
-
     @Override
     public void endTurn(){
         turn += 1;
@@ -211,7 +215,6 @@ public class Day implements GameMode{
             waveGenerate();
         }
     }
-
     @Override
     public Map generateMap() {
         return Map.generateDay();
@@ -221,4 +224,5 @@ public class Day implements GameMode{
     public void handleWin() {
 
     }
+
 }
