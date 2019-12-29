@@ -1,9 +1,7 @@
 package Controller.GameMode;
+import Controller.Game;
 import Model.Account.Player;
-import Model.Card.Bullet;
-import Model.Card.Card;
-import Model.Card.Plant;
-import Model.Card.Zombie;
+import Model.Card.*;
 import Model.Map.Map;
 
 import java.util.ArrayList;
@@ -65,12 +63,12 @@ public class Rail implements GameMode {
 
     @Override
     public void showHand() throws NotPlantException {
-
+        //show hand nadarim
     }
 
     @Override
     public void select(String a) throws NotPlantException {
-
+        //in selecto nadarim
     }
 
     @Override
@@ -87,14 +85,35 @@ public class Rail implements GameMode {
 
     @Override
     public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException {
-        if(selected!=null){
+        if(selected != null) {
+            if (map.board[column][row].plant.size() == 0) {
+                try {
+                    Plant tmp = (Plant)selected.clone();
+                    ArrayList<Weapon> weapons = new ArrayList<>();
+                    tmp.setRow(row);
+                    tmp.setColumn(column);
+                    for(int i=0 ; i<tmp.weapons.size() ; i++){
+                        Weapon tmpWeapon = (Weapon) tmp.weapons.get(i);
+                        tmpWeapon = (Weapon) tmpWeapon.clone();
+                        tmpWeapon.setRow(row);
+                        tmpWeapon.setColumn(column);
+                        weapons.add(tmpWeapon);
+                    }
+                    tmp.weapons = weapons;
 
-        }
-        else{
+                    for(Weapon w : tmp.weapons){
+                        w.turnsGenerate();
+                    }
+                    map.board[column][row].plant.add(tmp);
+                    plantsInMap.add(tmp);
+                    Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
+                    selected.setPermissionTime(selected.getTimeToReset());
+                }catch (CloneNotSupportedException e){}
+            }
+        } else {
             System.out.println("no card selected");
             throw new noCardSelected();
         }
-
     }
 
     @Override
