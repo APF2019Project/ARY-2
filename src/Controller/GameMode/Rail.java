@@ -50,6 +50,21 @@ public class Rail implements GameMode {
         }
     }
 
+    private void eatPlant(){ //zombie haa plant ro mikhoran
+        for(Zombie z : zombies){
+            int row = z.getRow();
+            int col = z.getColumn();
+            if(z.getDamage() >0 && row > 0 && map.board[col][row-1].plant.size() > 0){
+                Plant p =map.board[col][row].plant.get(map.board[col][row].plant.size()-1);
+                if(p.getHealth() > z.getDamage()) {
+                    p.setHealth(p.getHealth() - z.getDamage());
+                }else {
+                    map.board[col][row-1].plant.remove(p);
+                }
+            }
+        }
+    }
+
     public void list(){
         for (int i = 0; i < selectedCards.size(); i++) {
             System.out.println(selectedCards.get(i).getName());
@@ -161,12 +176,15 @@ public class Rail implements GameMode {
             }
         }
         for(Zombie zombie1 : zombies){
-            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
-            zombie1.setRow(zombie1.getRow() - 1);
-            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            if(map.board[zombie1.getColumn()][zombie1.getRow()-1].plant.size() == 0) {
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                zombie1.setRow(zombie1.getRow() - 1);
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            }
         }
         healthDecrease();
         shoot();
+        eatPlant();
         int numOfZombies = random.nextInt(4);
         for(int i=0;i<numOfZombies;i++){
             zombieGenerate();

@@ -234,6 +234,57 @@ public class ConsoleOutput {
         }
     }
 }
+
+/*
+create account
+ali
+123
+login
+ali
+123
+shop
+buy Zombie
+buy Football-Zombie
+buy Buckethead-Zombie
+buy Conehead-Zombie
+buy Zomboni
+buy Catapult-Zombie
+buy Bungee-Zombie
+buy balloon-Zombie
+exit
+play
+zombie
+select Zombie
+select Football-Zombie
+select Buckethead-Zombie
+select Conehead-Zombie
+select Zomboni
+select Catapult-Zombie
+select Bungee-Zombie
+select balloon-Zombie
+
+play
+
+put zombie 2
+put Buckethead-Zombie 2
+put Conehead-Zombie 2
+put Zomboni 2
+put Zomboni 2
+put Conehead-Zombie 2
+put zombie 1
+start
+show lawn
+end turn
+show lawn
+end turn
+show lawn
+end turn
+show lawn
+end turn
+
+ */
+
+
 /*
 create account
 ali
@@ -290,42 +341,4 @@ end turn
 show lawn
 end turn
 show lawn
- */
-/*
-create account
-ali
-123
-login
-ali
-123
-shop
-buy Zombie
-buy Football-Zombie
-buy Buckethead-Zombie
-buy Conehead-Zombie
-buy Zomboni
-buy Catapult-Zombie
-buy Bungee-Zombie
-buy balloon-Zombie
-exit
-play
-zombie
-select Zombie
-select Football-Zombie
-select Buckethead-Zombie
-select Conehead-Zombie
-select Zomboni
-select Catapult-Zombie
-select Bungee-Zombie
-select balloon-Zombie
-play
-put zombie 2
-put Buckethead-Zombie 2
-put Conehead-Zombie 2
-put Zomboni 2
-put Zomboni 2
-put Conehead-Zombie 2
-put zombie 1
-show lanes
-
  */

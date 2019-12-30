@@ -30,7 +30,7 @@ public class Primary {
                 ArrayList<Weapon> weapons = new ArrayList<>();
                 for(Weapon w : result.weapons){
                     Weapon tmp = (Weapon) w;
-                    weapons.add(tmp);
+                    weapons.add((Weapon)tmp.clone());
                 }
                 result.weapons = weapons;
             }
