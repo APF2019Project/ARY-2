@@ -20,6 +20,8 @@ public class Rail implements GameMode {
     private int turn;
     private int turnToGenerateRandomPlant;
     private int numberOfKilledZombies;
+    private int zombieAliveNumber;
+    private int turnsAfterLastWave;
     private ArrayList<Card> selectedCards;
     ArrayList<Zombie> enemies = new ArrayList<>(); // badan bayad dar canstructor load shavad
     ArrayList<Bullet> bullets = new ArrayList<>();
@@ -106,8 +108,8 @@ public class Rail implements GameMode {
                     }
                     map.board[column][row].plant.add(tmp);
                     plantsInMap.add(tmp);
-                    Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
-                    selected.setPermissionTime(selected.getTimeToReset());
+                    //Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
+                    //selected.setPermissionTime(selected.getTimeToReset());
                 }catch (CloneNotSupportedException e){}
             }
         } else {
@@ -139,16 +141,107 @@ public class Rail implements GameMode {
         if(turn%4==turnToGenerateRandomPlant && selectedCards.size()<10){
             generateRandomPlant();
         }
+        for(Bullet bullet1 : bullets){
+            bulletMove(bullet1);
+        }
+        for(int i1=0 ; i1<Map.colNumber; i1++) {
+            for (int j = 0; j < Map.rowNumber; j++) {
+                if (map.board[i1][j].plant.size() > 0) {
+                    Plant plant1 = map.board[i1][j].plant.get(0);
+                    for (Weapon w : plant1.weapons) {
+                        if (w.getTurn() >= w.getCycle() - 1) {
+                            w.setTurn(0);
+                            w.turnsGenerate();
+                        } else {
+                            w.setTurn(w.getTurn() + 1);
+                        }
+                    }
+                }
+            }
+        }
+        for(Zombie zombie1 : zombies){
+            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+            zombie1.setRow(zombie1.getRow() - 1);
+            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+        }
+        healthDecrease();
+        shoot();
+        int numOfZombies = random.nextInt(4);
+        for(int i=0;i<numOfZombies;i++){
+            zombieGenerate();
+        }
 
     }
-
+    private void shoot(){
+        for(int i1=0 ; i1<Map.colNumber; i1++){
+            for (int j=0 ; j < Map.rowNumber ; j++) {
+                if(map.board[i1][j].plant.size() > 0) {
+                    Plant plant1 = map.board[i1][j].plant.get(0);
+                    for (Weapon weapon : plant1.weapons){
+                        if(shootCondition(i1, j)){
+                            if(weapon.turns.get(weapon.getTurn())){
+                                bullets.add(weapon.bulletMaker());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private boolean shootCondition(int column, int row){
+        for(int i=row ; i<Map.rowNumber ; i++) {
+            if (map.board[column][i].zombies.size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void bulletMove(Bullet bullet1){
+        bullet1.setRow(bullet1.getRow() + 1);
+    }
+    private void healthDecrease(){
+        for(int s=0 ; s < bullets.size() ; s++) {
+            Bullet bullet1 = bullets.get(s);
+            int row = bullet1.getRow();
+            int c = bullet1.getColumn();
+            for (int r = bullet1.getStartRow(); r < row; r++) {
+                if (map.board[c][r].zombies.size() > 0) {
+                    Zombie randomZ = map.board[c][r].zombies.get(random.nextInt(map.board[c][r].zombies.size()));
+                    if (randomZ.getHealth() > bullet1.getWeapon().getDamage()) {
+                        randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
+                    } else {
+                        zombieAliveNumber -= 1;
+                        map.board[c][r].zombies.remove(randomZ);
+                        zombies.remove(randomZ);
+                        if (zombieAliveNumber == 0) {
+                            turnsAfterLastWave = 0;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+    }
     @Override
     public void handleWin() {
 
     }
 
     @Override
-    public void waveGenerate() {
+    public void waveGenerate(){
+    }
+    private void zombieGenerate(){
+        try {
+            Zombie zombie = (Zombie) enemies.get(random.nextInt(enemies.size())).clone();
+            zombie.setRow(Map.rowNumber - 1);
+            int column = random.nextInt(Map.colNumber);
+            zombie.setColumn(column);
+            zombieAliveNumber += 1;
+            zombies.add(zombie);
+            map.board[column][Map.rowNumber - 1].zombies.add(zombie);
+        } catch (CloneNotSupportedException e) {
 
+        }
     }
 }
+
