@@ -8,6 +8,7 @@ import Model.Map.Map;
 import Exception.NotPlantException;
 import Exception.noCardSelected;
 import Model.Primary;
+import Exception.invalidCardExeption;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -178,6 +179,26 @@ public class Day implements GameMode{
             zombieGenerate();
         }
     }
+
+    @Override
+    public boolean isStart() {
+        return false;
+    }
+
+    @Override
+    public void setStart(boolean b) {
+    }
+
+    @Override
+    public void showLanes() {
+
+    }
+
+    @Override
+    public void put(String name, int number) throws CloneNotSupportedException, invalidCardExeption {
+
+    }
+
     private void bulletMove(Bullet bullet1){
         bullet1.setRow(bullet1.getRow() + 1);
     }

@@ -6,7 +6,6 @@ public class Zombie extends Card implements Cloneable {
     private boolean startDelay;
     private boolean isWater;
 
-
     public int getShieldHealth() {
         return shieldHealth;
     }

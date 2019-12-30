@@ -10,6 +10,7 @@ import Exception.NotPlantException;
 import Exception.noCardSelected;
 import Model.Map.Square;
 import Model.Primary;
+import Exception.invalidCardExeption;
 
 import static Model.Primary.zombies;
 
@@ -242,6 +243,25 @@ public class Rail implements GameMode {
         } catch (CloneNotSupportedException e) {
 
         }
+    }
+
+    @Override
+    public boolean isStart() {
+        return false;
+    }
+
+    @Override
+    public void setStart(boolean b) {
+    }
+
+    @Override
+    public void showLanes() {
+
+    }
+
+    @Override
+    public void put(String name, int number) throws CloneNotSupportedException, invalidCardExeption {
+
     }
 }
 

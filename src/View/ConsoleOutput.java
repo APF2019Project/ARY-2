@@ -2,6 +2,7 @@ package View;
 
 import Controller.Game;
 import Controller.GameMode.Day;
+import Controller.GameMode.ZombieMode;
 import Controller.Menu.LoginMenu;
 import Controller.Menu.*;
 import Exception.*;
@@ -151,6 +152,9 @@ public class ConsoleOutput {
                         break;
 //                    case "water":
 //                        BattleMenu.getBattleMenu().setGameMode(new Water());
+                    case "zombie":
+                        BattleMenu.getBattleMenu().setGameMode(new ZombieMode());
+                        break;
                 }
                 MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
             }
@@ -161,28 +165,63 @@ public class ConsoleOutput {
                 Game.accounts[0].getCollection().init(true, "day", 7);
                 MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
             }
+            if(input[0].equals("zombie")){
+                Game.accounts[0].getCollection().init(false, "zombie", 7);
+                MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
+            }
         }
         if(MenuHandler.currentMenu instanceof BattleMenu){
-            if(input[0].equals("show") && input[1].equals("hand")){
-                try {
-                    BattleMenu.getBattleMenu().getGameMode().showHand();
-                }catch (NotPlantException e){}
+            if(Game.accounts[0].getCollection().getPlayGameMode().equals("day")) {
+                if (input[0].equals("show") && input[1].equals("hand")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().showHand();
+                    } catch (NotPlantException e) {
+                    }
+                }
+                if (input[0].equals("select")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().select(input[1]);
+                    } catch (NotPlantException e) {
+                    }
+                }
+                if (input[0].equals("plant")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+                    } catch (noCardSelected e) {
+                    } catch (CloneNotSupportedException e) {
+                    }
+                }
+                if (input[0].equals("end")) {
+                    BattleMenu.getBattleMenu().getGameMode().endTurn();
+                }
+                if (input[0].equals("show") && input[1].equals("lawn")) {
+                    BattleMenu.getBattleMenu().getGameMode().showLawn();
+                }
             }
-            if(input[0].equals("select")){
-                try {
-                    BattleMenu.getBattleMenu().getGameMode().select(input[1]);
-                }catch (NotPlantException e){}
-            }
-            if(input[0].equals("plant")){
-                try {
-                    BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
-                }catch (noCardSelected e){}catch (CloneNotSupportedException e){}
-            }
-            if(input[0].equals("end")){
-                BattleMenu.getBattleMenu().getGameMode().endTurn();
-            }
-            if(input[0].equals("show") && input[1].equals("lawn")){
-                BattleMenu.getBattleMenu().getGameMode().showLawn();
+            if(Game.accounts[0].getCollection().getPlayGameMode().equals("zombie")) {
+                if (input[0].equals("show") && input[1].equals("hand")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().showHand();
+                    } catch (NotPlantException e) {
+                    }
+                }
+                if (input[0].equals("end")) {
+                    if(BattleMenu.getBattleMenu().getGameMode().isStart())
+                        BattleMenu.getBattleMenu().getGameMode().endTurn();
+                }
+                if(input[0].equals("show") && input[1].equals("lanes")){
+                    BattleMenu.getBattleMenu().getGameMode().showLanes();
+                }
+                if(input[0].equals("put")){
+                    BattleMenu.getBattleMenu().getGameMode().put(input[1], Integer.parseInt(input[2]));
+                }
+                if (input[0].equals("show") && input[1].equals("lawn")) {
+                    BattleMenu.getBattleMenu().getGameMode().showLawn();
+                }
+                if(input[0].equals("start")){
+                    BattleMenu.getBattleMenu().getGameMode().setStart(true);
+                    BattleMenu.getBattleMenu().getGameMode().endTurn();
+                }
             }
         }
         if(input[0].equals("exit")){
@@ -251,4 +290,42 @@ end turn
 show lawn
 end turn
 show lawn
+ */
+/*
+create account
+ali
+123
+login
+ali
+123
+shop
+buy Zombie
+buy Football-Zombie
+buy Buckethead-Zombie
+buy Conehead-Zombie
+buy Zomboni
+buy Catapult-Zombie
+buy Bungee-Zombie
+buy balloon-Zombie
+exit
+play
+zombie
+select Zombie
+select Football-Zombie
+select Buckethead-Zombie
+select Conehead-Zombie
+select Zomboni
+select Catapult-Zombie
+select Bungee-Zombie
+select balloon-Zombie
+play
+put zombie 2
+put Buckethead-Zombie 2
+put Conehead-Zombie 2
+put Zomboni 2
+put Zomboni 2
+put Conehead-Zombie 2
+put zombie 1
+show lanes
+
  */
