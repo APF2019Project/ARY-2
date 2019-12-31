@@ -48,7 +48,12 @@ public class Plant extends Card implements Cloneable{
         this.weapons.add(weapon);
     }
 
-
+    public void setWeaponsCoordinate(){
+        for(Weapon w : weapons){
+            w.setRow(this.getRow());
+            w.setColumn(this.getColumn());
+        }
+    }
     public int getFirstshoot() {
         return firstShoot;
     }

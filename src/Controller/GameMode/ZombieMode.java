@@ -52,9 +52,10 @@ public class ZombieMode implements GameMode{
 
     @Override
     public void put (String name, int number)throws CloneNotSupportedException, invalidCardExeption{
-        if(zombiesInWave.size() + number <= 12) {
+        if(zombiesInMap.size() + number <= 12) {
             for (int i = 0; i < number; i++) {
                 zombiesInWave.add(zombieGenerate(name));
+                System.out.println(zombiesInWave.get(zombiesInWave.size()-1).getName()+"  "+zombiesInMap.size());
             }
             waveGenerate();
         }else {
@@ -132,6 +133,9 @@ public class ZombieMode implements GameMode{
         for(int i=0 ; i<Map.colNumber ; i++){
             for(int j=0 ; j<3 ; j++){
                 map1.board[i][j].plant.add( plantsInMap.get(t) );
+                plantsInMap.get(t).setRow(j);
+                plantsInMap.get(t).setColumn(i);
+                plantsInMap.get(t).setWeaponsCoordinate();
                 t += 1;
             }
         }
@@ -179,7 +183,7 @@ public class ZombieMode implements GameMode{
                 if(map.board[i1][j].plant.size() > 0) {
                     Plant plant1 = map.board[i1][j].plant.get(0);
                     for (Weapon weapon : plant1.weapons){
-                        if(shootCondition(i1, j)){
+                        if(weapon.getCycle() > 0 && shootCondition(i1, j)){
                             if(weapon.turns.get(weapon.getTurn())){
                                 bullets.add(weapon.bulletMaker());
                             }
@@ -193,7 +197,7 @@ public class ZombieMode implements GameMode{
         bullet1.setRow(bullet1.getRow() + 1);
     }
     private void healthDecrease(){
-        for(int s=0 ; s < bullets.size() ; s++) {
+        for(int s=bullets.size()-1 ; s >= 0 ; s--) {
             Bullet bullet1 = bullets.get(s);
             int row = bullet1.getRow();
             int c = bullet1.getColumn();
@@ -206,7 +210,22 @@ public class ZombieMode implements GameMode{
                         map.board[c][r].zombies.remove(randomZ);
                         zombiesInMap.remove(randomZ);
                     }
+                    bullets.remove(bullet1);
                     break;
+                }
+            }
+        }
+    }
+    private void eatPlant(){ //zombie haa plant ro mikhoran
+        for(Zombie z : zombiesInMap){
+            int row = z.getRow();
+            int col = z.getColumn();
+            if(z.getDamage() >0 && row > 0 && map.board[col][row-1].plant.size() > 0){
+                Plant p =map.board[col][row].plant.get(map.board[col][row].plant.size()-1);
+                if(p.getHealth() > z.getDamage()) {
+                    p.setHealth(p.getHealth() - z.getDamage());
+                }else {
+                    map.board[col][row-1].plant.remove(p);
                 }
             }
         }
@@ -258,12 +277,12 @@ public class ZombieMode implements GameMode{
             System.out.println(plant1.getName()+"\thealth: "+plant1.getHealth()+
                     "\tcoordinate: ("+plant1.getColumn()+","+plant1.getRow()+")");
         }
-//        for (Bullet bullet: bullets){
-//            System.out.println(bullet.getColumn()+"\t"+bullet.getRow()+" col and row of bullet  "+bullet);
-//        }
-        for(int i=0 ; i<Map.rowNumber ; i++){
+        for (Bullet bullet: bullets){
+            System.out.println(bullet.getColumn()+"\t"+bullet.getRow()+" col and row of bullet  "+bullet.getWeapon().getRow());
+        }
+        for(int i=0 ; i<Map.rowNumber+2 ; i++){
             for (int j=0 ; j<Map.colNumber ; j++) {
-                    for(Zombie zombie : map.board[i][j].zombies){
+                    for(Zombie zombie : map.board[j][i].zombies){
                         System.out.println("Zombie "+zombie.getName()+"\tHealth: "+zombie.getHealth()+
                                 "\tcoordinate:("+zombie.getColumn()+","+zombie.getRow()+")");
                     }
@@ -277,12 +296,13 @@ public class ZombieMode implements GameMode{
                 if (map.board[i1][j].plant.size() > 0) {
                     Plant plant1 = map.board[i1][j].plant.get(0);
                     for (Weapon w : plant1.weapons) {
-                        if (w.getTurn() >= w.getCycle() - 1) {
-                            w.setTurn(0);
-                            w.turnsGenerate();
-                        } else {
-                            w.setTurn(w.getTurn() + 1);
-                            w.getDamage(); // baraye az beyn bordan duplicate:)
+                        if(w.getCycle() > 0) {
+                            if (w.getTurn() >= w.getCycle() - 1) {
+                                w.setTurn(0);
+                                w.turnsGenerate();
+                            } else {
+                                w.setTurn(w.getTurn() + 1);
+                            }
                         }
                     }
                 }
@@ -290,9 +310,11 @@ public class ZombieMode implements GameMode{
         }
 
         for(Zombie zombie1 : zombiesInMap){
-            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
-            zombie1.setRow(zombie1.getRow() - 1);
-            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            if(map.board[zombie1.getColumn()][zombie1.getRow()-1].plant.size() == 0) {
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                zombie1.setRow(zombie1.getRow() - 1);
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            }
         }
 
         for(Bullet bullet1 : bullets){
@@ -300,6 +322,7 @@ public class ZombieMode implements GameMode{
         }
 
         healthDecrease();
+        eatPlant();
         shoot();
     }
     @Override

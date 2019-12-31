@@ -99,7 +99,7 @@ public class Day implements GameMode{
         }
     }
     private void healthDecrease(){
-        for(int s=0 ; s < bullets.size() ; s++) {
+        for(int s=bullets.size()-1 ; s >= 0 ; s--) {
             Bullet bullet1 = bullets.get(s);
             int row = bullet1.getRow();
             int c = bullet1.getColumn();
@@ -116,7 +116,22 @@ public class Day implements GameMode{
                             turnsAfterLastWave = 0;
                         }
                     }
+                    bullets.remove(bullet1);
                     break;
+                }
+            }
+        }
+    }
+    private void eatPlant(){ //zombie haa plant ro mikhoran
+        for(Zombie z : zombies){
+            int row = z.getRow();
+            int col = z.getColumn();
+            if(z.getDamage() >0 && row > 0 && map.board[col][row-1].plant.size() > 0){
+                Plant p =map.board[col][row].plant.get(map.board[col][row].plant.size()-1);
+                if(p.getHealth() > z.getDamage()) {
+                    p.setHealth(p.getHealth() - z.getDamage());
+                }else {
+                    map.board[col][row-1].plant.remove(p);
                 }
             }
         }
@@ -234,10 +249,13 @@ public class Day implements GameMode{
             bulletMove(bullet1);
         }
         for(Zombie zombie1 : zombies){
-            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
-            zombie1.setRow(zombie1.getRow() - 1);
-            map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            if(map.board[zombie1.getColumn()][zombie1.getRow()-1].plant.size() == 0) {
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                zombie1.setRow(zombie1.getRow() - 1);
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            }
         }
+        eatPlant();
         healthDecrease();
         shoot();
         if(turnsAfterLastWave == 7){
