@@ -201,6 +201,7 @@ public class Rail implements GameMode {
         }
 
     }
+
     private void shoot(){
         for(int i1=0 ; i1<Map.colNumber; i1++){
             for (int j=0 ; j < Map.rowNumber ; j++) {
@@ -217,6 +218,7 @@ public class Rail implements GameMode {
             }
         }
     }
+
     private boolean shootCondition(int column, int row){
         for(int i=row ; i<Map.rowNumber ; i++) {
             if (map.board[column][i].zombies.size() > 0) {
@@ -225,9 +227,11 @@ public class Rail implements GameMode {
         }
         return false;
     }
+
     private void bulletMove(Bullet bullet1){
         bullet1.setRow(bullet1.getRow() + 1);
     }
+
     private void healthDecrease(){
         for(int s=0 ; s < bullets.size() ; s++) {
             Bullet bullet1 = bullets.get(s);

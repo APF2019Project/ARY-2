@@ -337,6 +337,11 @@ public class ZombieMode implements GameMode{
     }
 
     @Override
+    public void remove(int column, int row) {
+
+    }
+
+    @Override
     public void handleWin() {
 
     }

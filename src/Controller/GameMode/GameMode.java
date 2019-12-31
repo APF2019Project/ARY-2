@@ -13,6 +13,7 @@ public interface GameMode  {
     void endTurn();
     void record();
     void list();
+    void remove(int column,int row);
     void handleWin();
     void waveGenerate();
     boolean isStart();

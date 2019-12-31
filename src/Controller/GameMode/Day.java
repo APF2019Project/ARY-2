@@ -7,6 +7,7 @@ import Model.Account.Player;
 import Model.Map.Map;
 import Exception.NotPlantException;
 import Exception.noCardSelected;
+import Model.Map.Square;
 import Model.Primary;
 import Exception.invalidCardExeption;
 
@@ -98,6 +99,7 @@ public class Day implements GameMode{
             throw new noCardSelected();
         }
     }
+
     private void healthDecrease(){
         for(int s=bullets.size()-1 ; s >= 0 ; s--) {
             Bullet bullet1 = bullets.get(s);
@@ -122,6 +124,7 @@ public class Day implements GameMode{
             }
         }
     }
+
     private void eatPlant(){ //zombie haa plant ro mikhoran
         for(Zombie z : zombies){
             int row = z.getRow();
@@ -136,6 +139,7 @@ public class Day implements GameMode{
             }
         }
     }
+
     private void shoot(){
         for(int i1=0 ; i1<Map.colNumber; i1++){
             for (int j=0 ; j < Map.rowNumber ; j++) {
@@ -152,6 +156,7 @@ public class Day implements GameMode{
             }
         }
     }
+
     public void showLawn(){
         for (Plant plant1 : plantsInMap){
             System.out.println(plant1.getName()+"\thealth: "+plant1.getHealth()+
@@ -164,6 +169,7 @@ public class Day implements GameMode{
             System.out.println(zombie.getColumn()+"\t"+zombie.getRow()+"\t"+zombie.getHealth()+" zombie  "+zombie.getName()+" jun "+zombie.getHealth());
         }
     }
+
     private boolean shootCondition(int column, int row){
         for(int i=row ; i<Map.rowNumber ; i++) {
             if (map.board[column][i].zombies.size() > 0) {
@@ -172,6 +178,7 @@ public class Day implements GameMode{
         }
         return false;
     }
+
     private void zombieGenerate(){
         try {
             Zombie zombie = (Zombie) enemies.get(random.nextInt(enemies.size())).clone();
@@ -271,6 +278,17 @@ public class Day implements GameMode{
     @Override
     public void list() {
 
+    }
+
+    @Override
+    public void remove(int column, int row) {
+        Square square=map.board[row][column];
+        if(square.plant.size()!=0){
+            square.plant.remove(0);
+        }
+        else {
+            System.out.println("no plant is here");
+        }
     }
 
     @Override
