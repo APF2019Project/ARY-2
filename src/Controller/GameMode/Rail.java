@@ -212,9 +212,11 @@ public class Rail implements GameMode {
                 if(map.board[i1][j].plant.size() > 0) {
                     Plant plant1 = map.board[i1][j].plant.get(0);
                     for (Weapon weapon : plant1.weapons){
-                        if(shootCondition(i1, j)){
-                            if(weapon.turns.get(weapon.getTurn())){
-                                bullets.add(weapon.bulletMaker());
+                        if(weapon.getDamage() > -1) {
+                            if (shootCondition(i1, j)) {
+                                if (weapon.turns.get(weapon.getTurn())) {
+                                    bullets.add(weapon.bulletMaker());
+                                }
                             }
                         }
                     }

@@ -150,11 +150,14 @@ public class Day implements GameMode{
                 if(map.board[i1][j].plant.size() > 0) {
                     Plant plant1 = map.board[i1][j].plant.get(0);
                     for (Weapon weapon : plant1.weapons){
-                        if(shootCondition(i1, j)){
-                            if(weapon.turns.get(weapon.getTurn())){
-                                bullets.add(weapon.bulletMaker());
+                        if(weapon.getDamage() > -1) {
+                            if (shootCondition(i1, j)) {
+                                if (weapon.turns.get(weapon.getTurn())) {
+                                    bullets.add(weapon.bulletMaker());
+                                }
                             }
                         }
+
                     }
                 }
             }
@@ -210,9 +213,13 @@ public class Day implements GameMode{
                 }
             }
             if(isOkToGo){
-                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
-                zombie1.setRow(zombie1.getRow() - speed);
-                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+                if(zombie1.getRow() >= speed) {
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                    zombie1.setRow(zombie1.getRow() - speed);
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+                }else {
+                    //bayad payam bede ke shoma bakhtid
+                }
             }
 
         }
