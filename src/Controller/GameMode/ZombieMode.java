@@ -196,6 +196,12 @@ public class ZombieMode implements GameMode{
     private void bulletMove(Bullet bullet1){
         bullet1.setRow(bullet1.getRow() + 1);
     }
+
+    private void speedReduce(Zombie zombie, Bullet bullet){
+        zombie.speedReduce[0] = (int)(zombie.getSpeed() / bullet.getWeapon().getSpeedReduce());
+        zombie.speedReduce[1] = 1;
+    }
+
     private void healthDecrease(){
         for(int s=bullets.size()-1 ; s >= 0 ; s--) {
             Bullet bullet1 = bullets.get(s);
@@ -210,6 +216,7 @@ public class ZombieMode implements GameMode{
                         map.board[c][r].zombies.remove(randomZ);
                         zombiesInMap.remove(randomZ);
                     }
+                    speedReduce(randomZ, bullet1);
                     bullets.remove(bullet1);
                     break;
                 }

@@ -232,8 +232,12 @@ public class Rail implements GameMode {
         bullet1.setRow(bullet1.getRow() + 1);
     }
 
+    private void speedReduce(Zombie zombie, Bullet bullet){
+        zombie.speedReduce[0] = (int)(zombie.getSpeed() / bullet.getWeapon().getSpeedReduce());
+        zombie.speedReduce[1] = 1;
+    }
     private void healthDecrease(){
-        for(int s=0 ; s < bullets.size() ; s++) {
+        for(int s=bullets.size()-1 ; s >= 0 ; s--) {
             Bullet bullet1 = bullets.get(s);
             int row = bullet1.getRow();
             int c = bullet1.getColumn();
@@ -246,11 +250,12 @@ public class Rail implements GameMode {
                         zombieAliveNumber -= 1;
                         map.board[c][r].zombies.remove(randomZ);
                         zombies.remove(randomZ);
-                        numberOfKilledZombies++;
                         if (zombieAliveNumber == 0) {
                             turnsAfterLastWave = 0;
                         }
                     }
+                    speedReduce(randomZ, bullet1);
+                    bullets.remove(bullet1);
                     break;
                 }
             }
