@@ -82,7 +82,7 @@ public class Rail implements GameMode {
     }
     @Override
     public Map generateMap() {
-        return null;
+        return Map.generateDay();
     }
 
     public void record(){
@@ -134,6 +134,7 @@ public class Rail implements GameMode {
                     }
                     map.board[column][row].plant.add(tmp);
                     plantsInMap.add(tmp);
+                    System.out.println(plantsInMap.get(0).getName());
                     //Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
                     //selected.setPermissionTime(selected.getTimeToReset());
                 }catch (CloneNotSupportedException e){}
@@ -161,12 +162,13 @@ public class Rail implements GameMode {
     @Override
     public void endTurn() {
         turn++;
-        if(turn%4==0){
+       /* if(turn%4==0){
             turnToGenerateRandomPlant=random.nextInt(5);
         }
         if(turn%4==turnToGenerateRandomPlant && selectedCards.size()<10){
             generateRandomPlant();
-        }
+        } */
+        generateRandomPlant();
         for(Bullet bullet1 : bullets){
             bulletMove(bullet1);
         }
@@ -199,6 +201,8 @@ public class Rail implements GameMode {
         for(int i=0;i<numOfZombies;i++){
             zombieGenerate();
         }
+
+
 
     }
 
