@@ -24,7 +24,7 @@ public class LoginMenu extends Menu{
 
     @Override
     public Menu enter(Menu subMenu) {
-        if(this.account==null && subMenu instanceof MainMenu){
+        if(this.account == null && subMenu instanceof MainMenu){
             System.out.println("no account has been signed in yet");
             return this;
         }

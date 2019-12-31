@@ -44,6 +44,8 @@ public class Zombie extends Card implements Cloneable {
         setSpeed(speed);
         setShieldHealth(shieldHealth);
         setWater(isWater);
+        this.speedReduce[0] = 0;
+        this.speedReduce[1] = 0;
     }
 
     public Zombie(){}
