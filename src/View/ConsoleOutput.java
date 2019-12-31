@@ -2,6 +2,7 @@ package View;
 
 import Controller.Game;
 import Controller.GameMode.Day;
+import Controller.GameMode.Rail;
 import Controller.GameMode.ZombieMode;
 import Controller.Menu.LoginMenu;
 import Controller.Menu.*;
@@ -169,6 +170,11 @@ public class ConsoleOutput {
                 Game.accounts[0].getCollection().init(false, "zombie", 7);
                 MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
             }
+            if(input[0].equals("rail")){
+                Game.accounts[0].getCollection().init(false,"rail",10);
+                BattleMenu.getBattleMenu().setGameMode(new Rail());
+                MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
+            }
         }
         if(MenuHandler.currentMenu instanceof BattleMenu){
             if(Game.accounts[0].getCollection().getPlayGameMode().equals("day")) {
@@ -221,6 +227,12 @@ public class ConsoleOutput {
                 if(input[0].equals("start")){
                     BattleMenu.getBattleMenu().getGameMode().setStart(true);
                     BattleMenu.getBattleMenu().getGameMode().endTurn();
+                }
+            }
+            if(Game.accounts[0].getCollection().getPlayGameMode().equals("rail")){
+                System.out.println("in rail mode");
+                if(input[0].equals("record")){
+                    BattleMenu.getBattleMenu().getGameMode().record();
                 }
             }
         }

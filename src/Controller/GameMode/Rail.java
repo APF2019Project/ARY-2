@@ -30,6 +30,16 @@ public class Rail implements GameMode {
     ArrayList<Plant> plantsInMap = new ArrayList<>();
     Random random = new Random();
 
+    public Rail(){
+        turn = 0;
+        map = generateMap();
+        this.selectedCards = Game.accounts[0].getCollection().selectedCards;
+        turnsAfterLastWave = 4;
+        zombieAliveNumber = 0;
+        numberOfKilledZombies=0;
+        player = Game.accounts[0].getPlayer();
+        enemies.addAll(Primary.zombies);
+    }
     public void remove(int column,int row){
         Square square=map.board[row][column];
         if(square.plant.size()!=0){
@@ -232,6 +242,7 @@ public class Rail implements GameMode {
                         zombieAliveNumber -= 1;
                         map.board[c][r].zombies.remove(randomZ);
                         zombies.remove(randomZ);
+                        numberOfKilledZombies++;
                         if (zombieAliveNumber == 0) {
                             turnsAfterLastWave = 0;
                         }
