@@ -266,6 +266,8 @@ public class Rail implements GameMode {
     @Override
     public void waveGenerate(){
     }
+
+
     private void zombieGenerate(){
         try {
             Zombie zombie = (Zombie) enemies.get(random.nextInt(enemies.size())).clone();
