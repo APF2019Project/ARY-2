@@ -55,7 +55,7 @@ public class Day implements GameMode{
             if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0) {
                 selected = plant;
                 System.out.println("select successfully");
-            } else{
+            } else {
                 System.out.println("you cant select this card");
             }
         }else {
@@ -221,6 +221,8 @@ public class Day implements GameMode{
                     map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
                 }else {
                     //bayad payam bede ke shoma bakhtid
+                    System.out.println("YOU LOST");
+
                 }
             }
 

@@ -106,7 +106,7 @@ public class Rail implements GameMode {
         }
         else{
             Plant plant= (Plant) selectedCards.get(a);
-            selected=plant;
+            selected= plant;
             System.out.println("selected successfully");
         }
     }
@@ -187,13 +187,14 @@ public class Rail implements GameMode {
                 }
             }
         }
-        for(Zombie zombie1 : zombies){
+     /*   for(Zombie zombie1 : zombies){
             if(map.board[zombie1.getColumn()][zombie1.getRow()-1].plant.size() == 0) {
                 map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
                 zombie1.setRow(zombie1.getRow() - 1);
                 map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
             }
-        }
+        } */
+        zombieMove();
         healthDecrease();
         shoot();
         eatPlant();
@@ -205,7 +206,33 @@ public class Rail implements GameMode {
 
 
     }
+    private void zombieMove(){
+        for(Zombie zombie1 : zombies){
+            int speed = zombie1.getSpeed();
+            if(zombie1.speedReduce[1] > 0){
+                speed = zombie1.speedReduce[0];
+                zombie1.speedReduce[1] -= 1;
+            }
+            boolean isOkToGo = true;
+            for(int i=1 ; i<= speed ; i++){
+                if(map.board[zombie1.getColumn()][zombie1.getRow()-i].plant.size() != 0) {
+                    isOkToGo = false;
+                }
+            }
+            if(isOkToGo){
+                if(zombie1.getRow() >= speed) {
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                    zombie1.setRow(zombie1.getRow() - speed);
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+                }else {
+                    //bayad payam bede ke shoma bakhtid
+                    System.out.println("YOU LOST");
 
+                }
+            }
+
+        }
+    }
     private void shoot(){
         for(int i1=0 ; i1<Map.colNumber; i1++){
             for (int j=0 ; j < Map.rowNumber ; j++) {
@@ -243,7 +270,7 @@ public class Rail implements GameMode {
         zombie.speedReduce[1] = 1;
     }
     private void healthDecrease(){
-        for(int s=bullets.size()-1 ; s >= 0 ; s--) {
+        for(int s= bullets.size()-1 ; s >= 0 ; s--) {
             Bullet bullet1 = bullets.get(s);
             int row = bullet1.getRow();
             int c = bullet1.getColumn();
