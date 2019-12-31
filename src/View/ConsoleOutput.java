@@ -178,6 +178,7 @@ public class ConsoleOutput {
                 MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
             }
         }
+
         if(MenuHandler.currentMenu instanceof BattleMenu){
             if(Game.accounts[0].getCollection().getPlayGameMode().equals("day")) {
                 if (input[0].equals("show") && input[1].equals("hand")) {
@@ -239,19 +240,20 @@ public class ConsoleOutput {
                 if(input[0].equals("list")){
                     BattleMenu.getBattleMenu().getGameMode().list();
                 }
-                if(input[0].equals("show") && input[0].equals("lawn")){
+                if(input[0].equals("show") && input[1].equals("lawn")){
                     BattleMenu.getBattleMenu().getGameMode().showLawn();
                 }
                 if(input[0].equals("select")){
                     BattleMenu.getBattleMenu().getGameMode().select(Integer.parseInt(input[1]));
                 }
-                if(input[0].equals("end turn")){
+                if(input[0].equals("end") && input[1].equals("turn")){
                     BattleMenu.getBattleMenu().getGameMode().endTurn();
                 }
                 if(input[0].equals("remove")){
                     BattleMenu.getBattleMenu().getGameMode().remove(Integer.parseInt(input[1]),Integer.parseInt(input[2]));
                 }
                 if(input[0].equals("plant")){
+                //    System.out.println("in plant");
                     BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]),Integer.parseInt(input[2]));
                 }
 
@@ -386,4 +388,18 @@ end turn
 show lawn
 end turn
 show lawn
+ */
+/*
+create account
+yasi
+123
+login
+yasi
+123
+play
+rail
+end turn
+end turn
+select 1
+plant
  */
