@@ -336,6 +336,11 @@ public class ZombieMode implements GameMode{
     }
 
     @Override
+    public void showSun() {
+
+    }
+
+    @Override
     public void record() {
 
     }

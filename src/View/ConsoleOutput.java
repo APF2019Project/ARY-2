@@ -206,6 +206,9 @@ public class ConsoleOutput {
                 if (input[0].equals("show") && input[1].equals("lawn")) {
                     BattleMenu.getBattleMenu().getGameMode().showLawn();
                 }
+                if(input[0].equals("sun")){
+                    BattleMenu.getBattleMenu().getGameMode().showSun();
+                }
             }
             if(Game.accounts[0].getCollection().getPlayGameMode().equals("zombie")) {
                 if (input[0].equals("show") && input[1].equals("hand")) {

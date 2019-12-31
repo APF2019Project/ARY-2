@@ -1,5 +1,6 @@
 package Controller.GameMode;
 import Controller.Game;
+import Controller.Menu.Menu;
 import Model.Account.Player;
 import Model.Card.*;
 import Model.Map.Map;
@@ -11,6 +12,7 @@ import Exception.noCardSelected;
 import Model.Map.Square;
 import Model.Primary;
 import Exception.invalidCardExeption;
+import View.MenuHandler;
 
 import static Model.Primary.zombies;
 
@@ -206,6 +208,20 @@ public class Rail implements GameMode {
 
 
     }
+
+    @Override
+    public void showSun() {
+
+    }
+
+    private void lostHandle(){
+        System.out.println("YOU LOST");
+        MenuHandler.currentMenu.exit();
+        MenuHandler.currentMenu.exit();
+        MenuHandler.currentMenu.exit();
+        //varede main menu mishavad
+    }
+
     private void zombieMove(){
         for(Zombie zombie1 : zombies){
             int speed = zombie1.getSpeed();
@@ -213,20 +229,33 @@ public class Rail implements GameMode {
                 speed = zombie1.speedReduce[0];
                 zombie1.speedReduce[1] -= 1;
             }
-            boolean isOkToGo = true;
-            for(int i=1 ; i<= speed ; i++){
+            int isOkToGo = -1;
+
+            for(int i=1 ; i<= Math.min(speed, zombie1.getRow()) ; i++){
                 if(map.board[zombie1.getColumn()][zombie1.getRow()-i].plant.size() != 0) {
-                    isOkToGo = false;
+                    isOkToGo = i;
                 }
             }
-            if(isOkToGo){
-                if(zombie1.getRow() >= speed) {
+            if(isOkToGo!=-1){
+                if(zombie1.getRow()  >= isOkToGo - 1 ) {
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                    zombie1.setRow(zombie1.getRow() - (isOkToGo - 1));
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+                }else {
+                    //bayad payam bede ke shoma bakhtid
+                    lostHandle();
+                    break;
+
+                }
+            }else {
+                if(zombie1.getRow()  >= speed ) {
                     map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
                     zombie1.setRow(zombie1.getRow() - speed);
                     map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
                 }else {
                     //bayad payam bede ke shoma bakhtid
-                    System.out.println("YOU LOST");
+                    lostHandle();
+                    break;
 
                 }
             }
@@ -340,3 +369,28 @@ public class Rail implements GameMode {
     }
 }
 
+/*
+create account
+ali
+123
+login
+ali
+123
+play
+rail
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+ */

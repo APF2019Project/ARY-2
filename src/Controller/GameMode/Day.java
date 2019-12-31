@@ -20,6 +20,8 @@ public class Day implements GameMode{
     private ArrayList<Card> cardsAvailable;
     private Player player;
     private Map map;
+    private int turnForAddingSun;
+
     ArrayList<Zombie> enemies = new ArrayList<>(); // badan bayad dar canstructor load shavad
     ArrayList<Bullet> bullets = new ArrayList<>();
     ArrayList<Zombie> zombies = new ArrayList<>();
@@ -288,7 +290,6 @@ public class Day implements GameMode{
             }
         }
 
-
         for(Bullet bullet1 : bullets){
             bulletMove(bullet1);
         }
@@ -300,6 +301,18 @@ public class Day implements GameMode{
         if(turnsAfterLastWave == 7){
             waveGenerate();
         }
+        if(turn%2==0){
+            int tmpSun=random.nextInt(3);
+            tmpSun=tmpSun+2;
+            Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun()+tmpSun);
+        }
+
+
+    }
+
+    @Override
+    public void showSun() {
+        System.out.println(Game.accounts[0].getPlayer().getSun());
     }
 
     @Override

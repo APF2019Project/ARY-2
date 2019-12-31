@@ -11,6 +11,7 @@ public interface GameMode  {
     void plant(int row, int column) throws noCardSelected, CloneNotSupportedException;
     void showLawn();
     void endTurn();
+    void showSun();
     void record();
     void list();
     void remove(int column,int row);
