@@ -12,6 +12,8 @@ import Model.Card.Plant;
 import Model.Collection;
 import Model.Primary;
 
+import javax.management.BadAttributeValueExpException;
+
 public class ConsoleOutput {
     public static String[] scanUserPass(){
         String[] result = new String[3];
@@ -234,6 +236,25 @@ public class ConsoleOutput {
                 if(input[0].equals("record")){
                     BattleMenu.getBattleMenu().getGameMode().record();
                 }
+                if(input[0].equals("list")){
+                    BattleMenu.getBattleMenu().getGameMode().list();
+                }
+                if(input[0].equals("show") && input[0].equals("lawn")){
+                    BattleMenu.getBattleMenu().getGameMode().showLawn();
+                }
+                if(input[0].equals("select")){
+                    BattleMenu.getBattleMenu().getGameMode().select(Integer.parseInt(input[1]));
+                }
+                if(input[0].equals("end turn")){
+                    BattleMenu.getBattleMenu().getGameMode().endTurn();
+                }
+                if(input[0].equals("remove")){
+                    BattleMenu.getBattleMenu().getGameMode().remove(Integer.parseInt(input[1]),Integer.parseInt(input[2]));
+                }
+                if(input[0].equals("plant")){
+                    BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]),Integer.parseInt(input[2]));
+                }
+
             }
         }
         if(input[0].equals("exit")){
