@@ -185,6 +185,28 @@ public class Day implements GameMode{
 
         }
     }
+    private void zombieMove(){
+        for(Zombie zombie1 : zombies){
+            int speed = zombie1.getSpeed();
+            if(zombie1.speedReduce[1] > 0){
+                speed = zombie1.speedReduce[0];
+                zombie1.speedReduce[1] -= 1;
+            }
+            boolean isOkToGo = true;
+            for(int i=1 ; i<= speed ; i++){
+                if(map.board[zombie1.getColumn()][zombie1.getRow()-i].plant.size() != 0) {
+                    isOkToGo = false;
+                }
+            }
+            if(isOkToGo){
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                zombie1.setRow(zombie1.getRow() - speed);
+                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+            }
+
+        }
+    }
+
     @Override
     public void waveGenerate(){
         System.out.println("NEW WAVE START");
@@ -248,13 +270,8 @@ public class Day implements GameMode{
         for(Bullet bullet1 : bullets){
             bulletMove(bullet1);
         }
-        for(Zombie zombie1 : zombies){
-            if(map.board[zombie1.getColumn()][zombie1.getRow()-1].plant.size() == 0) {
-                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
-                zombie1.setRow(zombie1.getRow() - 1);
-                map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
-            }
-        }
+
+        zombieMove();
         eatPlant();
         healthDecrease();
         shoot();

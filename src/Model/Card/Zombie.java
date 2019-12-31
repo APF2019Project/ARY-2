@@ -5,6 +5,7 @@ public class Zombie extends Card implements Cloneable {
     private int shieldHealth;
     private boolean startDelay;
     private boolean isWater;
+    public int[] speedReduce = new int[2];//avali effect ast va dovomi modati ke mande ast
 
     public int getShieldHealth() {
         return shieldHealth;
