@@ -1,6 +1,7 @@
 package View;
 import Controller.Game;
 import Controller.Menu.*;
+import Model.Card.Plant;
 import Model.Primary;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class MenuHandler {
         MainMenu.getMenu().addSubMenu(Play.getMenu());
 
         Play.getMenu().addSubMenu(CollectionMenu.getCollectionMenu());
-
+        Play.getMenu().addSubMenu(BattleMenu.getBattleMenu());
         CollectionMenu.getCollectionMenu().addSubMenu(BattleMenu.getBattleMenu());
 
         currentMenu = LoginMenu.getLoginMenu();

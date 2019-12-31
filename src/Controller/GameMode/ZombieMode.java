@@ -325,6 +325,17 @@ public class ZombieMode implements GameMode{
         eatPlant();
         shoot();
     }
+
+    @Override
+    public void record() {
+
+    }
+
+    @Override
+    public void list() {
+
+    }
+
     @Override
     public void handleWin() {
 

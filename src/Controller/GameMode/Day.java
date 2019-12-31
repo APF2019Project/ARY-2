@@ -262,6 +262,17 @@ public class Day implements GameMode{
             waveGenerate();
         }
     }
+
+    @Override
+    public void record() {
+
+    }
+
+    @Override
+    public void list() {
+
+    }
+
     @Override
     public Map generateMap() {
         return Map.generateDay();
