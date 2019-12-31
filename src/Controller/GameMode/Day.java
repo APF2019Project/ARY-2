@@ -92,7 +92,8 @@ public class Day implements GameMode{
                     plantsInMap.add(tmp);
                     Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
                     selected.setPermissionTime(selected.getTimeToReset());
-                }catch (CloneNotSupportedException e){}
+                }
+                catch (CloneNotSupportedException e){}
             }
         } else {
             System.out.println("no card selected");
@@ -192,7 +193,8 @@ public class Day implements GameMode{
             zombieAliveNumber += 1;
             zombies.add(zombie);
             map.board[column][Map.rowNumber - 1].zombies.add(zombie);
-        } catch (CloneNotSupportedException e) {
+        }
+        catch (CloneNotSupportedException e) {
 
         }
     }
