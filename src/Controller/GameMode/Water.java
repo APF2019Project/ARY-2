@@ -81,7 +81,16 @@ public class Water implements GameMode {
 
     @Override
     public void showLawn() {
-
+        for (Plant plant1 : plantsInMap){
+            System.out.println(plant1.getName()+"\thealth: "+plant1.getHealth()+
+                    "\tcoordinate: ("+plant1.getColumn()+","+plant1.getRow()+")");
+        }
+//        for (Bullet bullet: bullets){
+//            System.out.println(bullet.getColumn()+"\t"+bullet.getRow()+" col and row of bullet  "+bullet);
+//        }
+        for(Zombie zombie : zombies){
+            System.out.println(zombie.getColumn()+"\t"+zombie.getRow()+"\t"+zombie.getHealth()+" zombie  "+zombie.getName()+" jun "+zombie.getHealth());
+        }
     }
 
     @Override

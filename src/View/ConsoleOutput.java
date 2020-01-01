@@ -3,6 +3,7 @@ package View;
 import Controller.Game;
 import Controller.GameMode.Day;
 import Controller.GameMode.Rail;
+import Controller.GameMode.Water;
 import Controller.GameMode.ZombieMode;
 import Controller.Menu.LoginMenu;
 import Controller.Menu.*;
@@ -153,8 +154,8 @@ public class ConsoleOutput {
                     case "day":
                         BattleMenu.getBattleMenu().setGameMode(new Day());
                         break;
-//                    case "water":
-//                        BattleMenu.getBattleMenu().setGameMode(new Water());
+                    case "water":
+                       BattleMenu.getBattleMenu().setGameMode(new Water());
                     case "zombie":
                         BattleMenu.getBattleMenu().setGameMode(new ZombieMode());
                         break;
@@ -166,6 +167,10 @@ public class ConsoleOutput {
             System.out.println("you enter Play Menu");
             if(input[0].equals("day")){
                 Game.accounts[0].getCollection().init(true, "day", 7);
+                MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
+            }
+            if(input[0].equals("water")){
+                Game.accounts[0].getCollection().init(true,"water",7);
                 MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
             }
             if(input[0].equals("zombie")){
@@ -200,6 +205,9 @@ public class ConsoleOutput {
                     } catch (CloneNotSupportedException e) {
                     }
                 }
+                if(input[0].equals("remove")){
+                    BattleMenu.getBattleMenu().getGameMode().remove(Integer.parseInt(input[1]),Integer.parseInt(input[2]));
+                }
                 if (input[0].equals("end")) {
                     BattleMenu.getBattleMenu().getGameMode().endTurn();
                 }
@@ -209,6 +217,40 @@ public class ConsoleOutput {
                 if(input[0].equals("sun")){
                     BattleMenu.getBattleMenu().getGameMode().showSun();
                 }
+            }
+            if(Game.accounts[0].getCollection().getPlayGameMode().equals("water")){
+                if (input[0].equals("show") && input[1].equals("hand")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().showHand();
+                    } catch (NotPlantException e) {
+                    }
+                }
+                if (input[0].equals("select")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().select(input[1]);
+                    } catch (NotPlantException e) {
+                    }
+                }
+                if(input[0].equals("remove")){
+                    BattleMenu.getBattleMenu().getGameMode().remove(Integer.parseInt(input[1]),Integer.parseInt(input[2]));
+                }
+                if (input[0].equals("plant")) {
+                    try {
+                        BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+                    } catch (noCardSelected e) {
+                    } catch (CloneNotSupportedException e) {
+                    }
+                }
+                if (input[0].equals("end")) {
+                    BattleMenu.getBattleMenu().getGameMode().endTurn();
+                }
+                if (input[0].equals("show") && input[1].equals("lawn")) {
+                    BattleMenu.getBattleMenu().getGameMode().showLawn();
+                }
+                if(input[0].equals("sun")){
+                    BattleMenu.getBattleMenu().getGameMode().showSun();
+                }
+
             }
             if(Game.accounts[0].getCollection().getPlayGameMode().equals("zombie")) {
                 if (input[0].equals("show") && input[1].equals("hand")) {
