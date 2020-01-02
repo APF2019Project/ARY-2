@@ -114,8 +114,7 @@ public class Rail implements GameMode {
     }
 
     @Override
-    public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException {
-        if(selected != null) {
+    public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException { if(selected != null) {
             if (map.board[column][row].plant.size() == 0) {
                 try {
                     Plant tmp = (Plant)selected.clone();

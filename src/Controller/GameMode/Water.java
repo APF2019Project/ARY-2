@@ -2,10 +2,7 @@ package Controller.GameMode;
 
 import Controller.Game;
 import Model.Account.Player;
-import Model.Card.Bullet;
-import Model.Card.Card;
-import Model.Card.Plant;
-import Model.Card.Zombie;
+import Model.Card.*;
 import Model.Collection;
 import Model.Map.Map;
 import Model.Map.Square;
@@ -73,10 +70,52 @@ public class Water implements GameMode {
     public void select(int a) {
 
     }
-
+    public boolean checkIfCanBePlanted(int row,int column,Plant plant){
+        if(plant.isWater()==true && map.board[column][row].isWater()==false){
+            return false;
+        }
+        if(plant.isWater()==false && map.board[column][row].isWater()==true){
+            return false;
+        }
+        return true;
+    }
     @Override
     public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException {
+        if(selected != null) {
+            if (map.board[column][row].plant.size() == 0 || (map.board[column][row].plant.get(0).getName().equals("Lily-Pad") && map.board[column][row].plant.size()==1)) {
+                if(checkIfCanBePlanted(row,column,selected)) {
+                    try {
+                        Plant tmp = (Plant) selected.clone();
+                        ArrayList<Weapon> weapons = new ArrayList<>();
+                        tmp.setRow(row);
+                        tmp.setColumn(column);
+                        for (int i = 0; i < tmp.weapons.size(); i++) {
+                            Weapon tmpWeapon = (Weapon) tmp.weapons.get(i);
+                            tmpWeapon = (Weapon) tmpWeapon.clone();
+                            tmpWeapon.setRow(row);
+                            tmpWeapon.setColumn(column);
+                            weapons.add(tmpWeapon);
+                        }
+                        tmp.weapons = weapons;
 
+                        for (Weapon w : tmp.weapons) {
+                            w.turnsGenerate();
+                        }
+                        map.board[column][row].plant.add(tmp);
+                        plantsInMap.add(tmp);
+                        Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun() - selected.getSun());
+                        selected.setPermissionTime(selected.getTimeToReset());
+                    } catch (CloneNotSupportedException e) {
+                    }
+                }
+                else{
+                    System.out.println("this place is unavailable");
+                }
+            }
+        } else {
+            System.out.println("no card selected");
+            throw new noCardSelected();
+        }
     }
 
     @Override
