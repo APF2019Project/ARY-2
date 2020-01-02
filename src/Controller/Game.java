@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Game {
     public static Account[] accounts ={Account.getDefaultAccount(),Account.getDefaultAccount()};
+    public static int currentPlayer = 0;
     public static BattleMenu battle= BattleMenu.getBattleMenu();
     public static boolean hasLoggedIn = false;
     public static Scanner scanner=new Scanner(System.in);

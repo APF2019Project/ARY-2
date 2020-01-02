@@ -2,6 +2,7 @@ package View;
 
 import Controller.Game;
 import Controller.GameMode.Day;
+import Controller.GameMode.PVP;
 import Controller.GameMode.Rail;
 import Controller.GameMode.Water;
 import Controller.GameMode.ZombieMode;
@@ -60,7 +61,7 @@ public class ConsoleOutput {
                 if (MenuHandler.currentMenu instanceof LoginMenu) {
                     LoginMenu loginMenu = (LoginMenu) MenuHandler.currentMenu;
                     try {
-                        loginMenu.login(username, password);
+                        loginMenu.login(username, password, 0);
                         loginMenu.enter(MainMenu.getMenu());
                         System.out.println("login successfully");
                     } catch (InvalidAccountException e) {
@@ -134,23 +135,23 @@ public class ConsoleOutput {
         }
         if(MenuHandler.currentMenu instanceof CollectionMenu){
             if(input[0].equals("show") && input[1].equals("hand")){
-                Game.accounts[0].getCollection().showHand();
+                Game.accounts[Game.currentPlayer].getCollection().showHand();
             }
             if(input[0].equals("show") && input[1].equals("collection")){
-                Game.accounts[0].getCollection().showCollection();
+                Game.accounts[Game.currentPlayer].getCollection().showCollection();
             }
             if(input[0].length() >= 6 && input[0].substring(0, 6).equals("select")){
                 try {
-                    Game.accounts[0].getCollection().select(input[1]);
+                    Game.accounts[Game.currentPlayer].getCollection().select(input[1]);
                 }catch (invalidCardExeption e){}
             }
             if(input[0].length() >= 6 && input[0].substring(0, 6).equals("remove")){
                 try {
-                    Game.accounts[0].getCollection().remove(input[1]);
+                    Game.accounts[Game.currentPlayer].getCollection().remove(input[1]);
                 }catch (invalidCardExeption e){}
             }
             if(input[0].equals("play")){
-                switch (Game.accounts[0].getCollection().getPlayGameMode()){
+                switch (Game.accounts[Game.currentPlayer].getCollection().getPlayGameMode()){
                     case "day":
                         BattleMenu.getBattleMenu().setGameMode(new Day());
                         break;
@@ -160,8 +161,16 @@ public class ConsoleOutput {
                     case "zombie":
                         BattleMenu.getBattleMenu().setGameMode(new ZombieMode());
                         break;
+                    case "pvp1":
+                        Game.currentPlayer = 1;
+                        break;
+                    case "pvp2":
+                        Game.currentPlayer = 0;
+                        BattleMenu.getBattleMenu().setGameMode(new PVP());
                 }
-                MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
+                if(!Game.accounts[0].getCollection().getPlayGameMode().equals("pvp1")) {
+                    MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
+                }
             }
         }
         if(MenuHandler.currentMenu instanceof Play){
@@ -182,6 +191,23 @@ public class ConsoleOutput {
                 Game.accounts[0].getCollection().init(false,"rail",10);
                 BattleMenu.getBattleMenu().setGameMode(new Rail());
                 MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
+            }
+            if(input[0].equals("pvp")){
+                System.out.println("please enter second account");
+                String[] userAndPas = scanUserPass();
+                username = userAndPas[0];
+                password = userAndPas[1];
+                try {
+                    LoginMenu.getLoginMenu().login(username, password, 1);
+                    System.out.println("login successfully");
+                } catch (InvalidAccountException e) {
+                    System.out.println("invalid username");
+                } catch (WrongPasswordException e) {
+                    System.out.println("please enter correct password");
+                }
+                Game.accounts[0].getCollection().init(true, "pvp1", 7);
+                Game.accounts[1].getCollection().init(false, "pvp2", 7);
+                MenuHandler.currentMenu.enter(CollectionMenu.getCollectionMenu());
             }
         }
 
@@ -304,6 +330,60 @@ public class ConsoleOutput {
                 }
 
             }
+            if(Game.accounts[0].getCollection().getPlayGameMode().equals("pvp1")){
+                if(Game.currentPlayer == 1){
+                    if (input[0].equals("show") && input[1].equals("hand")) {
+                        try {
+                            BattleMenu.getBattleMenu().getGameMode().showHand();
+                        } catch (NotPlantException e) {
+                        }
+                    }
+                    if (input[0].equals("end")) {
+                        if(BattleMenu.getBattleMenu().getGameMode().isStart())
+                            BattleMenu.getBattleMenu().getGameMode().endTurn();
+                    }
+                    if(input[0].equals("show") && input[1].equals("lanes")){
+                        BattleMenu.getBattleMenu().getGameMode().showLanes();
+                    }
+                    if(input[0].equals("put")){
+                        BattleMenu.getBattleMenu().getGameMode().put(input[1], Integer.parseInt(input[2]));
+                    }
+                    if (input[0].equals("show") && input[1].equals("lawn")) {
+                        BattleMenu.getBattleMenu().getGameMode().showLawn();
+                    }
+                    if(input[0].equals("start")){
+                        BattleMenu.getBattleMenu().getGameMode().setStart(true);
+                        BattleMenu.getBattleMenu().getGameMode().endTurn();
+                    }
+                }
+                else if(Game.currentPlayer == 0){
+                    if (input[0].equals("show") && input[1].equals("hand")) {
+                        try {
+                            BattleMenu.getBattleMenu().getGameMode().showHand();
+                        } catch (NotPlantException e) {
+                        }
+                    }
+                    if (input[0].equals("select")) {
+                        try {
+                            BattleMenu.getBattleMenu().getGameMode().select(input[1]);
+                        } catch (NotPlantException e) {
+                        }
+                    }
+                    if (input[0].equals("plant")) {
+                        try {
+                            BattleMenu.getBattleMenu().getGameMode().plant(Integer.parseInt(input[1]), Integer.parseInt(input[2]));
+                        } catch (noCardSelected e) {
+                        } catch (CloneNotSupportedException e) {
+                        }
+                    }
+                    if (input[0].equals("ready")) {
+                        Game.currentPlayer = 1;
+                    }
+                    if (input[0].equals("show") && input[1].equals("lawn")) {
+                        BattleMenu.getBattleMenu().getGameMode().showLawn();
+                    }
+                }
+            }
         }
         if(input[0].equals("exit")){
             if(MenuHandler.currentMenu instanceof  LoginMenu)
@@ -315,6 +395,58 @@ public class ConsoleOutput {
         }
     }
 }
+/*
+create account
+ali
+123
+create account
+amir
+456
+login
+ali
+123
+shop
+buy repeater
+buy Peashooter
+buy Snow-pea
+buy Cabbage-pult
+buy Cactus
+buy Gatling-Pea
+buy Scaredy-shroom
+buy Kernel-pult
+buy Zombie
+buy Football-Zombie
+buy Buckethead-Zombie
+buy Conehead-Zombie
+buy Zomboni
+buy Catapult-Zombie
+buy Bungee-Zombie
+buy balloon-Zombie
+exit
+play
+pvp
+amir
+456
+select repeater
+select Peashooter
+select Snow-pea
+select Cabbage-pult
+select Cactus
+select Gatling-Pea
+select Scaredy-shroom
+select Kernel-pult
+play
+select Zombie
+select Football-Zombie
+select Buckethead-Zombie
+select Conehead-Zombie
+select Zomboni
+select Catapult-Zombie
+select Bungee-Zombie
+select balloon-Zombie
+play
+ */
+
 
 /*
 create account

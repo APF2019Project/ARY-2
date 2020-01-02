@@ -14,7 +14,8 @@ public class Square {
     public ArrayList<Zombie> zombies = new ArrayList<>();
 
 
-    public Square(int i, int j){
+    public
+    Square(int i, int j){
         this.columnNumber = i;
         this.rowNumber = j;
         this.isFull = false;

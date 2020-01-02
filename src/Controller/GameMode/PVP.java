@@ -1,4 +1,3 @@
-
 package Controller.GameMode;
 
 import Controller.Game;
@@ -185,19 +184,19 @@ public class PVP implements GameMode{
 
     @Override
     public void select(String name) throws NotPlantException {
-        int index = Collection.findCard(name, selectedCards);
-        if(index != -1) {
-            Plant plant = (Plant) selectedCards.get(index);
-            if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0) {
-                selected = plant;
-                System.out.println("select successfully");
-            } else{
-                System.out.println("you cant select this card");
+            int index = Collection.findCard(name, selectedCards);
+            if(index != -1) {
+                Plant plant = (Plant) selectedCards.get(index);
+                if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0) {
+                    selected = plant;
+                    System.out.println("select successfully");
+                } else{
+                    System.out.println("you cant select this card");
+                }
+            }else {
+                System.out.println("invalid card name");
+                throw new NotPlantException();
             }
-        }else {
-            System.out.println("invalid card name");
-            throw new NotPlantException();
-        }
     }
 
     @Override
@@ -292,6 +291,11 @@ public class PVP implements GameMode{
     }
 
     @Override
+    public void showSun() {
+
+    }
+
+    @Override
     public void record() {
 
     }
@@ -317,3 +321,4 @@ public class PVP implements GameMode{
 
     }
 }
+

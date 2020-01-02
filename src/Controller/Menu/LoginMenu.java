@@ -41,10 +41,10 @@ public class LoginMenu extends Menu{
         Account.addNewAccount(temporaryAccount);
     }
 
-    public void login(String username, String password) throws InvalidAccountException, WrongPasswordException {
+    public void login(String username, String password, int playerNumber) throws InvalidAccountException, WrongPasswordException {
         Account account = Account.getAccount(username);
         if(account.getPassword().equals(password)){
-            Game.accounts[0] = account;
+            Game.accounts[playerNumber] = account;
             Game.hasLoggedIn = true;
             this.account = account;
         }else {
