@@ -134,9 +134,78 @@ public class Water implements GameMode {
 
     @Override
     public void endTurn() {
+        turn += 1;
+        turnsAfterLastWave += 1;
+        for(Card card :selectedCards){
+            Plant p = (Plant) card;
+            if(p.getPermissionTime() > 0)
+                p.setPermissionTime(p.getPermissionTime() - 1);
+        }
 
+
+        for(int i1=0 ; i1<Map.colNumber; i1++) {
+            for (int j = 0; j < Map.rowNumber; j++) {
+                if (map.board[i1][j].plant.size() > 0) {
+                    Plant plant1 = map.board[i1][j].plant.get(map.board[i1][j].plant.size()-1);
+                    for (Weapon w : plant1.weapons) {
+                        if (w.getTurn() >= w.getCycle() - 1) {
+                            w.setTurn(0);
+                            w.turnsGenerate();
+                        } else {
+                            w.setTurn(w.getTurn() + 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        for(Bullet bullet1 : bullets){
+            bulletMove(bullet1);
+        }
+
+        zombieMove();
+        eatPlant();
+        healthDecrease();
+        shoot();
+        if(turnsAfterLastWave == 7){
+            waveGenerate();
+        }
+        if(turn%2==0){
+            int tmpSun=random.nextInt(3);
+            tmpSun=tmpSun+2;
+            Game.accounts[0].getPlayer().setSun(Game.accounts[0].getPlayer().getSun()+tmpSun);
+        }
     }
+    private void bulletMove(Bullet bullet1){
+        bullet1.setRow(bullet1.getRow() + 1);
+    }
+    private void zombieMove(){
+        for(Zombie zombie1 : zombies){
+            int speed = zombie1.getSpeed();
+            if(zombie1.speedReduce[1] > 0){
+                speed = zombie1.speedReduce[0];
+                zombie1.speedReduce[1] -= 1;
+            }
+            boolean isOkToGo = true;
+            for(int i=1 ; i<= speed ; i++){
+                if(map.board[zombie1.getColumn()][zombie1.getRow()-i].plant.size() != 0) {
+                    isOkToGo = false;
+                }
+            }
+            if(isOkToGo){
+                if(zombie1.getRow() >= speed) {
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.remove(zombie1);
+                    zombie1.setRow(zombie1.getRow() - speed);
+                    map.board[zombie1.getColumn()][zombie1.getRow()].zombies.add(zombie1);
+                }else {
+                    //bayad payam bede ke shoma bakhtid
+                    System.out.println("YOU LOST");
 
+                }
+            }
+
+        }
+    }
     @Override
     public void showSun() {
         System.out.println(Game.accounts[0].getPlayer().getSun());
@@ -156,7 +225,12 @@ public class Water implements GameMode {
     public void remove(int column, int row) {
         Square square=map.board[row][column];
         if(square.plant.size()!=0){
-            square.plant.remove(0);
+            if(square.plant.size()==2){
+                square.plant.remove(1);
+            }
+            else{
+                square.plant.remove(0);
+            }
         }
         else {
             System.out.println("no plant is here");
@@ -192,6 +266,75 @@ public class Water implements GameMode {
     public void put(String name, int number) throws CloneNotSupportedException, invalidCardExeption {
 
     }
+    private void eatPlant(){ //zombie haa plant ro mikhoran
+        for(Zombie z : zombies){
+            int row = z.getRow();
+            int col = z.getColumn();
+            if(z.getDamage() >0 && row > 0 && map.board[col][row-1].plant.size() > 0){
+                Plant p =map.board[col][row].plant.get(map.board[col][row].plant.size()-1);
+                if(p.getHealth() > z.getDamage()) {
+                    p.setHealth(p.getHealth() - z.getDamage());
+                }else {
+                    map.board[col][row-1].plant.remove(p);
+                }
+            }
+        }
+    }
+    private void shoot(){
+        for(int i1=0 ; i1<Map.colNumber; i1++){
+            for (int j=0 ; j < Map.rowNumber ; j++) {
+                if(map.board[i1][j].plant.size() > 0) {
+                    Plant plant1 = map.board[i1][j].plant.get(map.board[i1][j].plant.size()-1);
+                    for (Weapon weapon : plant1.weapons){
+                        if(weapon.getDamage() > -1) {
+                            if (shootCondition(i1, j)) {
+                                if (weapon.turns.get(weapon.getTurn())) {
+                                    bullets.add(weapon.bulletMaker());
+                                }
+                            }
+                        }
 
+                    }
+                }
+            }
+        }
+    }
+    private boolean shootCondition(int column, int row){
+        for(int i=row ; i<Map.rowNumber ; i++) {
+            if (map.board[column][i].zombies.size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    private void healthDecrease(){
+        for(int s=bullets.size()-1 ; s >= 0 ; s--) {
+            Bullet bullet1 = bullets.get(s);
+            int row = bullet1.getRow();
+            int c = bullet1.getColumn();
+            for (int r = bullet1.getStartRow(); r < row; r++) {
+                if (map.board[c][r].zombies.size() > 0) {
+                    Zombie randomZ = map.board[c][r].zombies.get(random.nextInt(map.board[c][r].zombies.size()));
+                    if (randomZ.getHealth() > bullet1.getWeapon().getDamage()) {
+                        randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
+                    } else {
+                        zombieAliveNumber -= 1;
+                        map.board[c][r].zombies.remove(randomZ);
+                        zombies.remove(randomZ);
+                        if (zombieAliveNumber == 0) {
+                            turnsAfterLastWave = 0;
+                        }
+                    }
+                    speedReduce(randomZ, bullet1);
+                    bullets.remove(bullet1);
+                    break;
+                }
+            }
+        }
+    }
+    private void speedReduce(Zombie zombie, Bullet bullet){
+        zombie.speedReduce[0] = (int)(zombie.getSpeed() / bullet.getWeapon().getSpeedReduce());
+        zombie.speedReduce[1] = 1;
+    }
 
 }

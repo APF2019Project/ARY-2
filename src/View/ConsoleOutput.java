@@ -156,6 +156,7 @@ public class ConsoleOutput {
                         break;
                     case "water":
                        BattleMenu.getBattleMenu().setGameMode(new Water());
+                       break;
                     case "zombie":
                         BattleMenu.getBattleMenu().setGameMode(new ZombieMode());
                         break;
