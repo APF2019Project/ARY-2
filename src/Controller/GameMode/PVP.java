@@ -184,7 +184,7 @@ public class PVP implements GameMode{
 
     @Override
     public void select(String name) throws NotPlantException {
-            int index = Collection.findCard(name, selectedCards);
+        int index = Collection.findCard(name, selectedCards);
             if(index != -1) {
                 Plant plant = (Plant) selectedCards.get(index);
                 if (player.getSun() >= plant.getSun() && plant.getPermissionTime() == 0) {

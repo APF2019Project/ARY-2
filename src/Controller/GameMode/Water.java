@@ -74,7 +74,8 @@ public class Water implements GameMode {
         if(plant.isWater()==true && map.board[column][row].isWater()==false){
             return false;
         }
-        if(plant.isWater()==false && map.board[column][row].isWater()==true){
+        if(plant.isWater()==false && map.board[column][row].isWater()==true &&
+                !map.board[column][row].plant.get(0).getName().equals("lily-pad")){
             return false;
         }
         return true;
@@ -83,7 +84,7 @@ public class Water implements GameMode {
     public void plant(int row, int column) throws noCardSelected, CloneNotSupportedException {
         if(selected != null) {
             if (map.board[column][row].plant.size() == 0 || (map.board[column][row].plant.get(0).getName().equals("Lily-Pad") && map.board[column][row].plant.size()==1)) {
-                if(checkIfCanBePlanted(row,column,selected)) {
+                if(checkIfCanBePlanted(row,column,selected) || (map.board[column][row].plant.get(0).getName().equals("Lily-Pad") && map.board[column][row].plant.size()==1)) {
                     try {
                         Plant tmp = (Plant) selected.clone();
                         ArrayList<Weapon> weapons = new ArrayList<>();

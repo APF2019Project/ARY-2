@@ -101,7 +101,11 @@ public class ConsoleOutput {
                 password = userAndPas[1];
             }
             if(input[0].equals("create")){
-                //kheili chert bod nazadim
+                try {
+                    Profile.getProfile().creatAccount(username, password);
+                } catch (AccountAlreadyExistsException e) {
+                    e.printStackTrace();
+                }
             }
             if(input[0].equals("change")){
                 Profile.getProfile().change(username, password);
@@ -163,12 +167,14 @@ public class ConsoleOutput {
                         break;
                     case "pvp1":
                         Game.currentPlayer = 1;
+                        Game.accounts[0].getCollection().setPlayGameMode("pvp2");
                         break;
                     case "pvp2":
                         Game.currentPlayer = 0;
+                        Game.accounts[0].getCollection().setPlayGameMode("pvp");
                         BattleMenu.getBattleMenu().setGameMode(new PVP());
                 }
-                if(!Game.accounts[0].getCollection().getPlayGameMode().equals("pvp1")) {
+                if(!Game.accounts[0].getCollection().getPlayGameMode().equals("pvp2")) {
                     MenuHandler.currentMenu.enter(BattleMenu.getBattleMenu());
                 }
             }
@@ -330,7 +336,8 @@ public class ConsoleOutput {
                 }
 
             }
-            if(Game.accounts[0].getCollection().getPlayGameMode().equals("pvp1")){
+            if(Game.accounts[0].getCollection().getPlayGameMode().equals("pvp")){
+                System.out.println("PVP");
                 if(Game.currentPlayer == 1){
                     if (input[0].equals("show") && input[1].equals("hand")) {
                         try {
@@ -365,6 +372,7 @@ public class ConsoleOutput {
                     }
                     if (input[0].equals("select")) {
                         try {
+                            System.out.println(input[1]);
                             BattleMenu.getBattleMenu().getGameMode().select(input[1]);
                         } catch (NotPlantException e) {
                         }
@@ -526,10 +534,11 @@ buy Cactus
 buy Gatling-Pea
 buy Scaredy-shroom
 buy Kernel-pult
+buy lily-pad
 exit
 play
-day
-select repeater
+water
+select lily-pad
 select Peashooter
 select Snow-pea
 select Cabbage-pult
@@ -538,7 +547,7 @@ select Gatling-Pea
 select Scaredy-shroom
 select Kernel-pult
 play
-select repeater
+select lily-pad
 plant 2 2
 plant 3 3
 plant 0 4

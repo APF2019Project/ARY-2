@@ -2,6 +2,7 @@ package Controller.Menu;
 
 import Controller.Game;
 import Model.Account.Account;
+import Exception.AccountAlreadyExistsException;
 import Exception.InvalidAccountException;
 
 public class Profile extends Menu {
@@ -23,7 +24,17 @@ public class Profile extends Menu {
         return true;
      }
 
-     public void change(String username, String password){
+    public void creatAccount(String username, String password) throws AccountAlreadyExistsException {
+        if (Account.hasAccount(username)) {
+            System.out.println("account already exist");
+            throw new AccountAlreadyExistsException();
+        }
+        Account temporaryAccount = new Account(username, password);
+        Account.addNewAccount(temporaryAccount);
+    }
+
+
+    public void change(String username, String password){
         if(Game.accounts[0].getUsername().equals(username))
             Game.accounts[0].setPassword(password);
         else{

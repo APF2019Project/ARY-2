@@ -309,6 +309,7 @@ public class Rail implements GameMode {
                         randomZ.setHealth(randomZ.getHealth() - bullet1.getWeapon().getDamage());
                     } else {
                         zombieAliveNumber -= 1;
+                        numberOfKilledZombies += 1;
                         map.board[c][r].zombies.remove(randomZ);
                         zombies.remove(randomZ);
                         if (zombieAliveNumber == 0) {

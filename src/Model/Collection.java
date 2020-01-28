@@ -12,6 +12,11 @@ public class Collection {
     public ArrayList<Card> selectedCards = new ArrayList<>();
     private boolean isPlantCollection;
     private int maxCard;
+
+    public void setPlayGameMode(String playGameMode) {
+        this.playGameMode = playGameMode;
+    }
+
     private String playGameMode;
 
     public Collection(){

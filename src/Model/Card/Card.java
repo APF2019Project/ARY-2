@@ -9,7 +9,7 @@ public abstract class Card {
     private int health;
     private int coolDown;
     private int currentCoolDown;
-    private int damage;
+    protected int damage;
     private Square location;
     private int price;
     private int row, column;

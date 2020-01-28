@@ -328,6 +328,8 @@ public class Day implements GameMode{
     @Override
     public void remove(int column, int row) {
         Square square=map.board[row][column];
+        Plant p = square.plant.get(0);
+        plantsInMap.remove(p);
         if(square.plant.size()!=0){
             square.plant.remove(0);
         }

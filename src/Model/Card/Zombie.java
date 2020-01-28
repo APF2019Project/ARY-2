@@ -38,7 +38,7 @@ public class Zombie extends Card implements Cloneable {
         this.speed = speed;
     }
 
-    public Zombie(String name,int health,int speed,int shieldHealth,boolean isWater){
+    public Zombie(String name,int health,int speed,int shieldHealth,boolean isWater, int damage){
         super.setName(name);
         super.setHealth(health);
         setSpeed(speed);
@@ -46,6 +46,7 @@ public class Zombie extends Card implements Cloneable {
         setWater(isWater);
         this.speedReduce[0] = 0;
         this.speedReduce[1] = 0;
+        super.damage = damage;
     }
 
     public Zombie(){}
