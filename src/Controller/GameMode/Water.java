@@ -1,6 +1,7 @@
 package Controller.GameMode;
 
 import Controller.Game;
+import Controller.Menu.MainMenu;
 import Model.Account.Player;
 import Model.Card.*;
 import Model.Collection;
@@ -245,9 +246,37 @@ public class Water implements GameMode {
 
     @Override
     public void waveGenerate() {
-
+        System.out.println("NEW WAVE START");
+        int numOfZombies = random.nextInt(7);
+        numOfZombies += 4;
+        for(int i=0 ; i<numOfZombies ; i++){
+            zombieGenerate();
+        }
     }
+    private void zombieGenerate(){
+        try {
+            Zombie zombie = (Zombie) enemies.get(random.nextInt(enemies.size())).clone();
+            zombie.setRow(Map.rowNumber - 1);
+            int column;
+            if(zombie.isWater()==true){
+                 column= random.nextInt(2)+2;
+            }
+            else{
+                column=random.nextInt(Map.colNumber);
+                while(column==2 || column==3){
+                    column=random.nextInt(Map.colNumber);
+                }
+            }
+       //     int column = random.nextInt(Map.colNumber);
+            zombie.setColumn(column);
+            zombieAliveNumber += 1;
+            zombies.add(zombie);
+            map.board[column][Map.rowNumber - 1].zombies.add(zombie);
+        }
+        catch (CloneNotSupportedException e) {
 
+        }
+    }
     @Override
     public boolean isStart() {
         return false;
